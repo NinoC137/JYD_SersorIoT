@@ -124,18 +124,18 @@ void WiFi_BLE_setUp()
     pServer->setCallbacks(new MyServerCallbacks()); // 设置连接和断开调用类
 
     pService->addCharacteristic(&RX_Characteristics);
-    RX_Descriptor.setValue("RX String");
+    RX_Descriptor.setValue("BLE Recieve Handle");
     RX_Characteristics.addDescriptor(new BLE2902());
 
     pService->addCharacteristic(&TX_Characteristics);
-    TX_Descriptor.setValue("TX String");
+    TX_Descriptor.setValue("BLE Transmit Handle");
     TX_Characteristics.addDescriptor(new BLE2902());
 
     RX_Characteristics.setCallbacks(new MyCallbacks()); // 设置回调函数
     TX_Characteristics.setCallbacks(new MyCallbacks()); // 设置回调函数
 
-    RX_Characteristics.setValue("RX init"); // 发送信息
-    TX_Characteristics.setValue("TX init"); // 发送信息
+    RX_Characteristics.setValue("BLE Recieve init"); // 发送信息
+    TX_Characteristics.setValue("BLE Transmit init"); // 发送信息
 
     pService->start();
     pServer->getAdvertising()->start();
@@ -192,7 +192,6 @@ void WiFiHandler()
             {
             default:
                 Serial.printf("error cmd!\r\n");
-
                 http.POST(post_Payload.c_str());
                 break;
             }

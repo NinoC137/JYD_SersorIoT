@@ -14,7 +14,7 @@
 #include <BLEDevice.h>
 #include <BLE2902.h>
 
-#define bleServer "BLE_SERVER"
+#define bleServer "JYD_SensorIoT"
 #define STA_SSID "NinoC137"
 #define STA_PASS "zyx666...+"
 

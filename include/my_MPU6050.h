@@ -5,6 +5,8 @@
 
 #include "MPU6050_6Axis_MotionApps20.h"
 
+#include "WiFi_BLE.h"
+
 void MPU6050_setup(void);
 
 void MPU6050_getData();
