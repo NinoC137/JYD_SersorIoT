@@ -1,6 +1,7 @@
 {
     "cmake.sourceDirectory": "E:/Clion_For_ESP32/JYD_SensorIoT/.pio/libdeps/JYD_SersorIoT/TFT_eSPI",
     "files.associations": {
-        "sstream": "cpp"
+        "sstream": "cpp",
+        "vector": "cpp"
     }
 }

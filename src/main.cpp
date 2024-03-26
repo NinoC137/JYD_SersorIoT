@@ -1,9 +1,9 @@
 #include <Arduino.h>
+#include "FreeRTOS.h"
 #include "WiFi_BLE.h"
 #include "my_MPU6050.h"
 #include "GUI_Driver.h"
-
-#include "FreeRTOS.h"
+#include "ModbusTask.h"
 
 char serial1_Buffer[256];
 
@@ -16,8 +16,8 @@ TaskHandle_t SensorTaskHandle;
 void GUITaskThread(void *argument);
 TaskHandle_t GUITaskHandle;
 
-void SerialThread(void *argument);
-TaskHandle_t SerialHandle;
+void ModBusThread(void *argument);
+TaskHandle_t ModBusHandle;
 
 static void SystemData_GUI();
 
@@ -25,17 +25,19 @@ void setup()
 {
   Serial.begin(115200);
 
-  xTaskCreatePinnedToCore(IoTTaskThread, "IoTTask", 1024*8, NULL, 2, &IoTTaskHandle, 1);
+  xTaskCreatePinnedToCore(IoTTaskThread, "IoTTask", 1024*4, NULL, 2, &IoTTaskHandle, 1);
 
-  xTaskCreatePinnedToCore(SensorTaskThread, "SensorTask", 1024*6, NULL, 2, &IoTTaskHandle, 0);
+  xTaskCreatePinnedToCore(ModBusThread, "ModBusTask", 1024*4, NULL, 2, &ModBusHandle, 0);
 
-//   xTaskCreatePinnedToCore(GUITaskThread, "GUITask", 4096, NULL, 1, &IoTTaskHandle, 0);
+  xTaskCreatePinnedToCore(SensorTaskThread, "SensorTask", 1024*4, NULL, 2, &IoTTaskHandle, 0);
+
+  // xTaskCreatePinnedToCore(GUITaskThread, "GUITask", 4096, NULL, 1, &IoTTaskHandle, 0);
 
   // std::stringstream urlStream;
   // urlStream << "http://" << WiFi_Data.serverip << ":" << WiFi_Data.serverport;
   // Serial.printf("Try to connect %s\r\n",urlStream.str().c_str());
-
   // http.begin(urlStream.str().c_str()); //连接服务器对应域名
+  
 }
 
 void SensorTaskThread(void *argument){
@@ -47,11 +49,19 @@ void SensorTaskThread(void *argument){
   }
 }
 
+void ModBusThread(void *argument){
+  Modbus_Init();
+  for(;;){
+    Modbus_configSingleRegister(163, 7);
+    vTaskDelay(300);
+  } 
+}
+
 void GUITaskThread(void *argument){
   GUI_setup();
   std::string GUI_logString = std::string(serial1_Buffer);
   for(;;){
-    SystemData_GUI();
+    // SystemData_GUI();
     MPU6050_GUILog();
     GUI_logPrint(GUI_logString);
     vTaskDelay(500);

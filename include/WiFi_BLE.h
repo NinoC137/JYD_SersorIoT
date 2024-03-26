@@ -31,8 +31,8 @@ public:
     std::string devID;
   };
 
-  std::string serverip = "";
-  int serverport = 6588;
+  std::string serverip = "192.168.5.170";
+  int serverport = 3001;
 
   WiFiIndex WiFi_store[3];
 };
