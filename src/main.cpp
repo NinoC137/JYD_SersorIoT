@@ -5,6 +5,7 @@
 #include "GUI_Driver.h"
 #include "ModbusTask.h"
 
+
 char serial1_Buffer[256];
 
 void IoTTaskThread(void *argument);
@@ -25,7 +26,7 @@ void setup()
 {
   Serial.begin(115200);
 
-  xTaskCreatePinnedToCore(IoTTaskThread, "IoTTask", 1024*4, NULL, 2, &IoTTaskHandle, 1);
+  xTaskCreatePinnedToCore(IoTTaskThread, "IoTTask", 1024*6, NULL, 2, &IoTTaskHandle, 1);
 
   xTaskCreatePinnedToCore(ModBusThread, "ModBusTask", 1024*4, NULL, 2, &ModBusHandle, 0);
 
@@ -33,11 +34,6 @@ void setup()
 
   // xTaskCreatePinnedToCore(GUITaskThread, "GUITask", 4096, NULL, 1, &IoTTaskHandle, 0);
 
-  // std::stringstream urlStream;
-  // urlStream << "http://" << WiFi_Data.serverip << ":" << WiFi_Data.serverport;
-  // Serial.printf("Try to connect %s\r\n",urlStream.str().c_str());
-  // http.begin(urlStream.str().c_str()); //连接服务器对应域名
-  
 }
 
 void SensorTaskThread(void *argument){
@@ -51,9 +47,11 @@ void SensorTaskThread(void *argument){
 
 void ModBusThread(void *argument){
   Modbus_Init();
+  Modbus_configSingleRegister(163, 3);  //配置波特率为9600(默认配置)
+  Modbus_getRegisterValue(0, 3);
   for(;;){
-    Modbus_configSingleRegister(163, 7);
-    vTaskDelay(300);
+    // Modbus_getRegisterValue(0, 3);
+    vTaskDelay(100);
   } 
 }
 
@@ -69,14 +67,18 @@ void GUITaskThread(void *argument){
 }
 
 void IoTTaskThread(void *argument){
+  std::stringstream urlStream;
+  urlStream << "http://" << WiFi_Data.serverip << ":" << WiFi_Data.serverport << "/cmd/connect";
+  Serial.printf("Try to connect %s\r\n", urlStream.str().c_str());
+
   WiFi_BLE_setUp();
   configTime(gmtOffset_sec, 0, "pool.ntp.org");
 
   for(;;){
     BLEHandler();
-    // WiFiHandler();
+    WiFiHandler();
     ProjectDataUpdate();
-    vTaskDelay(5);
+    vTaskDelay(100);
   }
 }
 

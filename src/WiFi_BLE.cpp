@@ -1,11 +1,11 @@
 #include "WiFi_BLE.h"
-
 #include "cmd_Parse.h"
+#include "wifiFix.h"
+WiFiClient* wifi = new WiFiClientFixed();
 
 char WiFiStatus_str[2][30] = {
-  "WiFi_Connect",
-  "WiFi_notConnect"
-}; 
+    "WiFi_Connect",
+    "WiFi_notConnect"};
 
 WiFiClient client; // ESP32设置为客户端, TCP连接服务器
 const IPAddress serverIP(192, 168, 1, 1);
@@ -71,7 +71,8 @@ void WiFi_BLE_setUp()
     WiFi.begin(WiFi_Data.WiFi_store[0].SSID, WiFi_Data.WiFi_store[0].PassWord);
 
     static int counter;
-    while(WiFi.status() != WL_CONNECTED && counter < 5){
+    while (WiFi.status() != WL_CONNECTED && counter < 5)
+    {
         delay(100);
         WiFi.begin(WiFi_Data.WiFi_store[0].SSID, WiFi_Data.WiFi_store[0].PassWord);
         counter++;
@@ -108,7 +109,7 @@ void WiFi_BLE_setUp()
     // ProjectData.old_CRC = "123456";
 
     Serial.print("IPv4 address:");
-    Serial.println(WiFi_Data.WiFi_store[0].ipv4);
+    Serial.println(WiFi.localIP());
     Serial.print("Mac:");
     Serial.printf("%s\r\n", WiFi_Data.WiFi_store[0].MacAddress.c_str());
     Serial.print("devID:");
@@ -134,7 +135,7 @@ void WiFi_BLE_setUp()
     RX_Characteristics.setCallbacks(new MyCallbacks()); // 设置回调函数
     TX_Characteristics.setCallbacks(new MyCallbacks()); // 设置回调函数
 
-    RX_Characteristics.setValue("BLE Recieve init"); // 发送信息
+    RX_Characteristics.setValue("BLE Recieve init");  // 发送信息
     TX_Characteristics.setValue("BLE Transmit init"); // 发送信息
 
     pService->start();
@@ -170,17 +171,22 @@ void BLEHandler()
 
 void WiFiHandler()
 {
-    // WIFI连接服务器部分
+    std::stringstream urlStream;
+    urlStream << "http://" << WiFi_Data.serverip << ":" << WiFi_Data.serverport << "/cmd/connect";
+    // Serial.printf("Try to connect %s\r\n", urlStream.str().c_str());
+    http.begin(*wifi, urlStream.str().c_str()); // 连接服务器对应域名
+    http.addHeader("Content-Type", "application/json");
+
     int httpCode = http.GET();
     if (httpCode > 0)
     {
         if (httpCode == HTTP_CODE_OK) // HTTP请求无异常
         {
-            WiFi_json_root = (char *)http.getString().c_str(); // 读取get到的json串
-            Serial.println(WiFi_json_root);
-
-            std::string post_Payload("ESP32 POST TEST");
-
+            String *payload = new String(1024);
+            *payload = http.getString();
+            Serial.printf("get %s\r\n", payload->c_str());
+            WiFi_json_root = (char *)payload->c_str(); // 读取get到的json串
+            
             cJSON *root = cJSON_Parse(WiFi_json_root);
             if (root == NULL)
             {
@@ -190,15 +196,25 @@ void WiFiHandler()
 
             switch (cmd->valueint)
             {
+            case 1:
+                cmd1(root);
+                break;
             default:
                 Serial.printf("error cmd!\r\n");
+                std::string post_Payload("something error.");
                 http.POST(post_Payload.c_str());
                 break;
             }
 
             cJSON_Delete(root);
+            delete (payload);
+        }
+        else
+        {
+            Serial.printf("http Error.\r\n");
         }
     }
+    http.end();
 }
 
 void ProjectDataUpdate()
@@ -207,10 +223,15 @@ void ProjectDataUpdate()
     updateLocalTime();
     static int cnt_dataupdate;
 
-    if(WiFi.status() == WL_CONNECTED){
+    if (WiFi.status() == WL_CONNECTED)
+    {
         ProjectData.wifistatus = 0;
-    }else{
+        Serial.printf("WiFi connected. IPv4:%s\r\n", WiFi.localIP().toString().c_str());
+    }
+    else
+    {
         ProjectData.wifistatus = 1;
+        WiFi.begin(STA_SSID, STA_PASS);
     }
 
     if (ProjectData.runTime >= ProjectData.worktime)
@@ -239,8 +260,6 @@ void HeartBeatUpdate()
         if (cnt_heartbeat >= HeartBeat.keepAliveTime * 200) // 5ms cnt+1 所以keepAliveTime * 200放缩后对应毫秒级的单位
         {
             HeartBeat.keepLiveCnt++;
-            cmd16();
-            cmd17();
 
             cnt_heartbeat = 0;
         }

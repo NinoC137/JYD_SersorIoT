@@ -11,7 +11,7 @@ extern ModbusClientRTU MB;
 
 void Modbus_Init();
 
-void Modbus_getAllRegisterValue();
+void Modbus_getRegisterValue(uint16_t startAddress, uint16_t dataLength);
 void Modbus_configSingleRegister(uint16_t registerAddress, uint16_t value_Hex);
 
 #endif // !__MODBUSTASK_H

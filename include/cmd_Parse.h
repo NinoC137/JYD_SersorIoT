@@ -3,7 +3,7 @@
 
 #include "WiFi_BLE.h"
 
-void cmd1(); // 扫描3个WiFi
+void cmd1(cJSON *root); // 扫描3个WiFi
 
 void cmd2(cJSON *root); // 设置WiFi
 

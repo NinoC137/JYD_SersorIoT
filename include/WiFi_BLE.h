@@ -15,8 +15,8 @@
 #include <BLE2902.h>
 
 #define bleServer "JYD_SensorIoT"
-#define STA_SSID "NinoC137"
-#define STA_PASS "zyx666...+"
+#define STA_SSID "GDUT-HUAWEI"
+#define STA_PASS "AlwaysBe1@"
 
 class WiFiData{
 public:
@@ -31,7 +31,7 @@ public:
     std::string devID;
   };
 
-  std::string serverip = "192.168.5.170";
+  std::string serverip = "192.168.5.8";
   int serverport = 3001;
 
   WiFiIndex WiFi_store[3];

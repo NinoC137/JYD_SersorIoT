@@ -21,9 +21,23 @@ static inline void calculateCRC16(const uint16_t *data, size_t length, uint16_t 
     crc.restart();
 }
 
-// Define an onData handler function to receive the regular responses
-// Arguments are Modbus server ID, the function code requested, the message data and length of it, 
-// plus a user-supplied token to identify the causing request
+static void printMsg(ModbusMessage msg) {
+  Serial.printf("Message size: %d\n", msg.size());
+  for (auto& byte : msg) {
+    Serial.printf("%02X ", byte);
+  }
+  if (msg.getError() != SUCCESS) {
+    Serial.printf("Is an error message: %02d - %s\n", msg.getError(), (const char *)ModbusError(msg.getError()));
+  }
+  Serial.println("\n");
+}
+
+static void sendMsg(ModbusMessage msg){
+  for (auto& byte : msg) {
+    Serial2.printf("%02X ", byte);
+  }
+}
+
 void handleData(ModbusMessage response, uint32_t token) 
 {
   Serial.printf("Response: serverID=%d, FC=%d, Token=%08X, length=%d:\n", response.getServerID(), response.getFunctionCode(), token, response.size());
@@ -33,8 +47,6 @@ void handleData(ModbusMessage response, uint32_t token)
   Serial.println("");
 }
 
-// Define an onError handler function to receive error responses
-// Arguments are the error code returned and a user-supplied token to identify the causing request
 void handleError(Error error, uint32_t token) 
 {
   // ModbusError wraps the error code and provides a readable error message for it
@@ -59,28 +71,31 @@ void Modbus_Init(){
   MB.begin(Serial2);
 }
 
-void Modbus_getAllRegisterValue(){
+void Modbus_getRegisterValue(uint16_t startAddress, uint16_t dataLength){
     static uint32_t Token = 0;
 // Create request for
 // (Fill in your data here!)
 // - server ID = 1
 // - function code = 0x03 (read holding register)
 // - address to read = word 0
-// - data words to read = 2
+// - data words to read = 3
 // - token to match the response with the request.
 //
 // If something is missing or wrong with the call parameters, we will immediately get an error code 
 // and the request will not be issued
 
-    uint16_t wData[] = {0x0000, 0x0007};
-    uint16_t finalData[3];
+    uint16_t crcValue[3];
+    crcValue[0] = startAddress;
+    crcValue[1] = dataLength;
+    calculateCRC16(crcValue, 2, &crcValue[2]);
 
-    finalData[0] = wData[0];
-    finalData[1] = wData[1];
-    calculateCRC16(wData, sizeof(wData)/sizeof(wData[0]), &finalData[2]);
+    Error err = MB.addRequest(Token++, 1, READ_HOLD_REGISTER, startAddress, dataLength);
 
-    Error err = MB.addRequest(Token++, 1, READ_HOLD_REGISTER, (uint16_t)0x0000, 3, 6, finalData);
-    if (err!=SUCCESS) {
+    ModbusMessage msg;
+    msg.setMessage(1, READ_HOLD_REGISTER, startAddress, dataLength);
+    printMsg(msg);
+
+    if (err != SUCCESS) {
         ModbusError e(err);
         Serial.printf("Error creating request: %02X - %s\n", (int)e, (const char *)e);
     }
@@ -92,12 +107,11 @@ void Modbus_configSingleRegister(uint16_t registerAddress, uint16_t value_Hex){
     wData[0] = 0x0106;
     wData[1] = registerAddress;
     wData[2] = value_Hex;
-
     calculateCRC16(wData, 3, &wData[3]);
 
-    //show up on Serial log
-    for (int i = 0; i < 4; i++) {
-        Serial.printf("%02X", wData[i]);
-    }
-    Serial.println("");
+    ModbusMessage msg;
+    msg.add(wData[0], wData[1], wData[2], wData[3]);
+    
+    // printMsg(msg);
+    sendMsg(msg);
 }

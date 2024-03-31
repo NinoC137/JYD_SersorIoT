@@ -36,15 +36,15 @@ void MPU6050_setup(void)
   Wire.begin(12, 14, 400000);
 
   // initialize device
-  Serial.println(F("Initializing I2C devices..."));
+  // Serial.println(F("Initializing I2C devices..."));
   mpu.initialize();
 
   // verify connection
-  Serial.println(F("Testing device connections..."));
-  Serial.println(mpu.testConnection() ? F("MPU6050 connection successful") : F("MPU6050 connection failed"));
+  // Serial.println(F("Testing device connections..."));
+  // Serial.println(mpu.testConnection() ? F("MPU6050 connection successful") : F("MPU6050 connection failed"));
 
   // load and configure the DMP
-  Serial.println(F("Initializing DMP..."));
+  // Serial.println(F("Initializing DMP..."));
   devStatus = mpu.dmpInitialize();
 
   // supply your own gyro offsets here, scaled for min sensitivity
@@ -59,9 +59,10 @@ void MPU6050_setup(void)
     // Calibration Time: generate offsets and calibrate our MPU6050
     mpu.CalibrateAccel(6);
     mpu.CalibrateGyro(6);
-    mpu.PrintActiveOffsets();
+    // mpu.PrintActiveOffsets();
+    
     // turn on the DMP, now that it's ready
-    Serial.println(F("Enabling DMP..."));
+    // Serial.println(F("Enabling DMP..."));
     mpu.setDMPEnabled(true);
 
     // enable Arduino interrupt detection
@@ -142,7 +143,7 @@ void MPU6050_SendJSONPack(){
 
   char* JsonString = cJSON_Print(IMUDataJson);
 
-  Serial.print(JsonString);
+  // Serial.print(JsonString);
   TX_Characteristics.setValue(JsonString);
   TX_Characteristics.notify();
 
