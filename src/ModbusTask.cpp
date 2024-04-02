@@ -89,7 +89,6 @@ void Modbus_getRegisterValue(uint16_t startAddress, uint16_t dataLength){
 //
 // If something is missing or wrong with the call parameters, we will immediately get an error code 
 // and the request will not be issued
-
     uint16_t crcValue[4];
     crcValue[0] = 0x0103;
     crcValue[1] = startAddress;
