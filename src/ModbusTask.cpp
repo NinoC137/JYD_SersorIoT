@@ -26,6 +26,13 @@ static void printMsg(ModbusMessage msg) {
   for (auto& byte : msg) {
     Serial.printf("%02X ", byte);
   }
+
+  Serial.printf("\n------------Hex format----------------\n");
+  for (auto& byte : msg) {
+    Serial.write(byte);
+  }
+  Serial.printf("\n--------------------------------------\n");
+
   if (msg.getError() != SUCCESS) {
     Serial.printf("Is an error message: %02d - %s\n", msg.getError(), (const char *)ModbusError(msg.getError()));
   }
@@ -34,7 +41,7 @@ static void printMsg(ModbusMessage msg) {
 
 static void sendMsg(ModbusMessage msg){
   for (auto& byte : msg) {
-    Serial2.printf("%02X ", byte);
+    Serial2.write(byte);
   }
 }
 
@@ -56,10 +63,8 @@ void handleError(Error error, uint32_t token)
 
 void Modbus_Init(){
 // Set up Serial2 connected to Modbus RTU
-// (Fill in your data here!)
   RTUutils::prepareHardwareSerial(Serial2);
   Serial2.begin(9600, SERIAL_8N1, GPIO_NUM_17, GPIO_NUM_16);
-
 // Set up ModbusRTU client.
 // - provide onData handler function
   MB.onDataHandler(&handleData);
@@ -69,6 +74,7 @@ void Modbus_Init(){
   MB.setTimeout(2000);
 // Start ModbusRTU background task
   MB.begin(Serial2);
+  MB.useModbusRTU();
 }
 
 void Modbus_getRegisterValue(uint16_t startAddress, uint16_t dataLength){
@@ -84,16 +90,18 @@ void Modbus_getRegisterValue(uint16_t startAddress, uint16_t dataLength){
 // If something is missing or wrong with the call parameters, we will immediately get an error code 
 // and the request will not be issued
 
-    uint16_t crcValue[3];
-    crcValue[0] = startAddress;
-    crcValue[1] = dataLength;
-    calculateCRC16(crcValue, 2, &crcValue[2]);
-
-    Error err = MB.addRequest(Token++, 1, READ_HOLD_REGISTER, startAddress, dataLength);
+    uint16_t crcValue[4];
+    crcValue[0] = 0x0103;
+    crcValue[1] = startAddress;
+    crcValue[2] = dataLength;
+    calculateCRC16(crcValue, 3, &crcValue[3]);
 
     ModbusMessage msg;
     msg.setMessage(1, READ_HOLD_REGISTER, startAddress, dataLength);
-    printMsg(msg);
+    msg.add(crcValue[3]);
+    // printMsg(msg);
+
+    Error err = MB.addRequest(msg, Token++);
 
     if (err != SUCCESS) {
         ModbusError e(err);

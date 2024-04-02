@@ -48,7 +48,7 @@ void SensorTaskThread(void *argument){
 void ModBusThread(void *argument){
   Modbus_Init();
   Modbus_configSingleRegister(163, 3);  //配置波特率为9600(默认配置)
-  Modbus_getRegisterValue(0, 3);
+  Modbus_getRegisterValue(0, 7);
   for(;;){
     // Modbus_getRegisterValue(0, 3);
     vTaskDelay(100);
