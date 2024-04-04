@@ -25,7 +25,11 @@
 >
 >   * res：成功返回0,非0表示失败
 
+
+
 ## WiFi前端部分JSON指令
+
+
 
 ### 获取传感器的3轴速度平均值数据
 
@@ -45,11 +49,12 @@
 >
 > ``` json
 > {
->  	"res":0,
->  	"cmd":1,
+> 	"res":0,
+> 	"cmd":1,
+>     "sysRunTime": 2186,
 > 	"x_speed":100,
->  	"y_speed":20,
->  	"z_speed":5
+> 	"y_speed":20,
+> 	"z_speed":5
 > }
 > ```
 
@@ -73,8 +78,9 @@
 >
 > ``` json
 > {
->  	"res":0,
->  	"cmd":2,
+> 	"res":0,
+> 	"cmd":2,
+>     "sysRunTime": 2186,
 > 	"temp":26
 > }
 > ```
@@ -99,11 +105,12 @@
 >
 > ``` json
 > {
->  	"res":0,
->  	"cmd":3,
+> 	"res":0,
+> 	"cmd":3,
+>     "sysRunTime": 2186,
 > 	"x_acc":6,
->  	"y_acc":12,
->  	"z_acc":4
+> 	"y_acc":12,
+> 	"z_acc":4
 > }
 > ```
 
@@ -127,20 +134,21 @@
 >
 > ``` json
 > {
->  	"res":0,
->  	"cmd":4,
+> 	"res":0,
+> 	"cmd":4,
+>     "sysRunTime": 2186,
 > 	"x_speedmax":100,
->     "x_speedkrt": 10,
->     "x_accmax":8,
->     "x_acckrt":9,
->     "y_speedmax":80,
->     "y_speedkrt": 20,
->     "y_accmax":9,
->     "y_acckrt":13,
->     "z_speedmax":50,
->     "z_speedkrt": 3,
->     "z_accmax":13,
->     "z_acckrt":2,
+>  "x_speedkrt": 10,
+>  "x_accmax":8,
+>  "x_acckrt":9,
+>  "y_speedmax":80,
+>  "y_speedkrt": 20,
+>  "y_accmax":9,
+>  "y_acckrt":13,
+>  "z_speedmax":50,
+>  "z_speedkrt": 3,
+>  "z_accmax":13,
+>  "z_acckrt":2,
 > }
 > ```
 >
@@ -172,11 +180,12 @@
 >
 > ``` json
 > {
->  	"res":0,
->  	"cmd":5,
+> 	"res":0,
+> 	"cmd":5,
+>     "sysRunTime": 2186,
 > 	"x_dispeek":20,
->  	"y_dispeek":12,
->  	"z_dispeek":9
+> 	"y_dispeek":12,
+> 	"z_dispeek":9
 > }
 > ```
 
@@ -204,33 +213,34 @@
 >
 > ``` json
 > {
->  	"res":0,
->  	"cmd":6,
+> 	"res":0,
+> 	"cmd":6,
+>     "sysRunTime": 2186,
 > 	"fft_count":26,
->  	"channalID":1,
->  	"rotate_speed":20,
->     "inside_eigenvalue":26,
->  	"outside_eigenvalue":29,
->  	"roll_eigenvalue":20,
->     "shell_eigenvalue":13,
->     "point_1":10,
->     "point_2":10,
->     "point_3":10,
->     "point_4":10,
->     "point_5":10,
->     "point_6":10,
->     "point_7":10,
->     "point_8":10,
->     "band_1":13,
->     "band_2":13,
->     "band_3":13,
->     "band_4":13,
->     "band_5":13,
->     "band_6":13,
->     "band_7":13,
->     "band_8":13,
->     "maxpower_order":2,
->     "total_power":999
+> 	"channalID":1,
+> 	"rotate_speed":20,
+>  "inside_eigenvalue":26,
+> 	"outside_eigenvalue":29,
+> 	"roll_eigenvalue":20,
+>  "shell_eigenvalue":13,
+>  "point_1":10,
+>  "point_2":10,
+>  "point_3":10,
+>  "point_4":10,
+>  "point_5":10,
+>  "point_6":10,
+>  "point_7":10,
+>  "point_8":10,
+>  "band_1":13,
+>  "band_2":13,
+>  "band_3":13,
+>  "band_4":13,
+>  "band_5":13,
+>  "band_6":13,
+>  "band_7":13,
+>  "band_8":13,
+>  "maxpower_order":2,
+>  "total_power":999
 > }
 > ```
 >
@@ -280,30 +290,31 @@
 >
 > ``` json
 > {
->  	"res":0,
->  	"cmd":7,
+> 	"res":0,
+> 	"cmd":7,
+>     "sysRunTime": 2186,
 > 	"paddle_eigenvalue_1": 1,
->     "paddle_eigenvalue_2": 2,
->     "paddle_eigenvalue_3": 3,
->     "paddle_eigenvalue_4": 4,
->     "point_1":10,
->     "point_2":10,
->     "point_3":10,
->     "point_4":10,
->     "point_5":10,
->     "point_6":10,
->     "point_7":10,
->     "point_8":10,
->     "band_1":13,
->     "band_2":13,
->     "band_3":13,
->     "band_4":13,
->     "band_5":13,
->     "band_6":13,
->     "band_7":13,
->     "band_8":13,
->     "maxpower_order":2,
->     "total_power":999
+>  "paddle_eigenvalue_2": 2,
+>  "paddle_eigenvalue_3": 3,
+>  "paddle_eigenvalue_4": 4,
+>  "point_1":10,
+>  "point_2":10,
+>  "point_3":10,
+>  "point_4":10,
+>  "point_5":10,
+>  "point_6":10,
+>  "point_7":10,
+>  "point_8":10,
+>  "band_1":13,
+>  "band_2":13,
+>  "band_3":13,
+>  "band_4":13,
+>  "band_5":13,
+>  "band_6":13,
+>  "band_7":13,
+>  "band_8":13,
+>  "maxpower_order":2,
+>  "total_power":999
 > }
 > ```
 >
@@ -341,33 +352,34 @@
 >
 > ``` json
 > {
->  	"res":0,
->  	"cmd":8,
+> 	"res":0,
+> 	"cmd":8,
+>     "sysRunTime": 2186,
 > 	"fft_count":26,
->  	"channalID":2,
->  	"rotate_speed":20,
->     "inside_eigenvalue":26,
->  	"outside_eigenvalue":29,
->  	"roll_eigenvalue":20,
->     "shell_eigenvalue":13,
->     "point_1":10,
->     "point_2":10,
->     "point_3":10,
->     "point_4":10,
->     "point_5":10,
->     "point_6":10,
->     "point_7":10,
->     "point_8":10,
->     "band_1":13,
->     "band_2":13,
->     "band_3":13,
->     "band_4":13,
->     "band_5":13,
->     "band_6":13,
->     "band_7":13,
->     "band_8":13,
->     "maxpower_order":2,
->     "total_power":999
+> 	"channalID":2,
+> 	"rotate_speed":20,
+>  "inside_eigenvalue":26,
+> 	"outside_eigenvalue":29,
+> 	"roll_eigenvalue":20,
+>  "shell_eigenvalue":13,
+>  "point_1":10,
+>  "point_2":10,
+>  "point_3":10,
+>  "point_4":10,
+>  "point_5":10,
+>  "point_6":10,
+>  "point_7":10,
+>  "point_8":10,
+>  "band_1":13,
+>  "band_2":13,
+>  "band_3":13,
+>  "band_4":13,
+>  "band_5":13,
+>  "band_6":13,
+>  "band_7":13,
+>  "band_8":13,
+>  "maxpower_order":2,
+>  "total_power":999
 > }
 > ```
 >
@@ -417,30 +429,31 @@
 >
 > ``` json
 > {
->  	"res":0,
->  	"cmd":9,
+> 	"res":0,
+> 	"cmd":9,
+>     "sysRunTime": 2186,
 > 	"paddle_eigenvalue_1": 1,
->     "paddle_eigenvalue_2": 2,
->     "paddle_eigenvalue_3": 3,
->     "paddle_eigenvalue_4": 4,
->     "point_1":10,
->     "point_2":10,
->     "point_3":10,
->     "point_4":10,
->     "point_5":10,
->     "point_6":10,
->     "point_7":10,
->     "point_8":10,
->     "band_1":13,
->     "band_2":13,
->     "band_3":13,
->     "band_4":13,
->     "band_5":13,
->     "band_6":13,
->     "band_7":13,
->     "band_8":13,
->     "maxpower_order":2,
->     "total_power":999
+>  "paddle_eigenvalue_2": 2,
+>  "paddle_eigenvalue_3": 3,
+>  "paddle_eigenvalue_4": 4,
+>  "point_1":10,
+>  "point_2":10,
+>  "point_3":10,
+>  "point_4":10,
+>  "point_5":10,
+>  "point_6":10,
+>  "point_7":10,
+>  "point_8":10,
+>  "band_1":13,
+>  "band_2":13,
+>  "band_3":13,
+>  "band_4":13,
+>  "band_5":13,
+>  "band_6":13,
+>  "band_7":13,
+>  "band_8":13,
+>  "maxpower_order":2,
+>  "total_power":999
 > }
 > ```
 >
@@ -478,33 +491,34 @@
 >
 > ``` json
 > {
->  	"res":0,
->  	"cmd":10,
+> 	"res":0,
+> 	"cmd":10,
+>     "sysRunTime": 2186,
 > 	"fft_count":26,
->  	"channalID":3,
->  	"rotate_speed":20,
->     "inside_eigenvalue":26,
->  	"outside_eigenvalue":29,
->  	"roll_eigenvalue":20,
->     "shell_eigenvalue":13,
->     "point_1":10,
->     "point_2":10,
->     "point_3":10,
->     "point_4":10,
->     "point_5":10,
->     "point_6":10,
->     "point_7":10,
->     "point_8":10,
->     "band_1":13,
->     "band_2":13,
->     "band_3":13,
->     "band_4":13,
->     "band_5":13,
->     "band_6":13,
->     "band_7":13,
->     "band_8":13,
->     "maxpower_order":2,
->     "total_power":999
+> 	"channalID":3,
+> 	"rotate_speed":20,
+>  "inside_eigenvalue":26,
+> 	"outside_eigenvalue":29,
+> 	"roll_eigenvalue":20,
+>  "shell_eigenvalue":13,
+>  "point_1":10,
+>  "point_2":10,
+>  "point_3":10,
+>  "point_4":10,
+>  "point_5":10,
+>  "point_6":10,
+>  "point_7":10,
+>  "point_8":10,
+>  "band_1":13,
+>  "band_2":13,
+>  "band_3":13,
+>  "band_4":13,
+>  "band_5":13,
+>  "band_6":13,
+>  "band_7":13,
+>  "band_8":13,
+>  "maxpower_order":2,
+>  "total_power":999
 > }
 > ```
 >
@@ -554,30 +568,31 @@
 >
 > ``` json
 > {
->  	"res":0,
->  	"cmd":11,
+> 	"res":0,
+> 	"cmd":11,
+>     "sysRunTime": 2186,
 > 	"paddle_eigenvalue_1": 1,
->     "paddle_eigenvalue_2": 2,
->     "paddle_eigenvalue_3": 3,
->     "paddle_eigenvalue_4": 4,
->     "point_1":10,
->     "point_2":10,
->     "point_3":10,
->     "point_4":10,
->     "point_5":10,
->     "point_6":10,
->     "point_7":10,
->     "point_8":10,
->     "band_1":13,
->     "band_2":13,
->     "band_3":13,
->     "band_4":13,
->     "band_5":13,
->     "band_6":13,
->     "band_7":13,
->     "band_8":13,
->     "maxpower_order":2,
->     "total_power":999
+>  "paddle_eigenvalue_2": 2,
+>  "paddle_eigenvalue_3": 3,
+>  "paddle_eigenvalue_4": 4,
+>  "point_1":10,
+>  "point_2":10,
+>  "point_3":10,
+>  "point_4":10,
+>  "point_5":10,
+>  "point_6":10,
+>  "point_7":10,
+>  "point_8":10,
+>  "band_1":13,
+>  "band_2":13,
+>  "band_3":13,
+>  "band_4":13,
+>  "band_5":13,
+>  "band_6":13,
+>  "band_7":13,
+>  "band_8":13,
+>  "maxpower_order":2,
+>  "total_power":999
 > }
 > ```
 >
@@ -613,15 +628,16 @@
 >
 > ``` json
 > {
->  	"res":0,
->  	"cmd":12,
+> 	"res":0,
+> 	"cmd":12,
+>     "sysRunTime": 2186,
 > 	"channalx_status":0,
->     "channaly_status":1,
->     "channalz_status":0,
->     "temp_status":1,
->     "x_waring":0,
->     "y_waring":1,
->     "z_waring":0
+>  "channaly_status":1,
+>  "channalz_status":0,
+>  "temp_status":1,
+>  "x_waring":0,
+>  "y_waring":1,
+>  "z_waring":0
 > }
 > ```
 >
@@ -651,10 +667,11 @@
 >
 > ``` json
 > {
->  	"res":0,
->  	"cmd":13,
+> 	"res":0,
+> 	"cmd":13,
+>     "sysRunTime": 2186,
 > 	"version":12,
->     "license":211
+>  "license":211
 > }
 > ```
 >
@@ -680,12 +697,13 @@
 >
 > ``` json
 > {
->  	"res":0,
->  	"cmd":14,
+> 	"res":0,
+> 	"cmd":14,
+>     "sysRunTime": 2186,
 > 	"BPFI":12,
->     "BPFO":211,
->     "BSF":123,
->     "FTF":55
+>  "BPFO":211,
+>  "BSF":123,
+>  "FTF":55
 > }
 > ```
 >
@@ -717,8 +735,9 @@
 >
 > ``` json
 > {
->  	"res":0,
->  	"cmd":15,
+> 	"res":0,
+> 	"cmd":15,
+>     "sysRunTime": 2186,
 > 	"measue_speed":100,
 > 	"proportion":50
 > }
@@ -732,7 +751,246 @@
 
 ### 获取传感器各关注点的转频倍数与关注带起始+结束点转频倍数
 
+> 寄存器: 171~187
+>
+> start: 171;   length: 2*17
+>
+> 指令:
+>
+> ``` json
+> {
+> 	"cmd":16
+> }
+> ```
+>
+> 返回值:
+>
+> ``` json
+> {
+> 	"res":0,
+> 	"cmd":16,
+>     "sysRunTime": 2186,
+> 	"point1_gain":0.5,
+> 	"point2_gain":1.0,
+>     "point3_gain":1.5,
+>     "point4_gain":2.0,
+>     "point5_gain":2.0,
+>     "point6_gain":2.0,
+>     "point7_gain":2.0,
+>     "point8_gain":2.0,
+>     "band1_startgain":0.45,
+>     "band1_endgain":0.45,
+> 	"band2_startgain":0.45,
+>     "band2_endgain":0.45,
+>     "band3_startgain":0.45,
+>     "band3_endgain":0.45,
+>     "band4_startgain":0.45,
+>     "band4_endgain":0.45,
+>     "band5_startgain":0.45,
+>     "band5_endgain":0.45
+> }
+> ```
+>
 
+
+
+### 获取滚动体个数, 滚动体直径与轴承节径
+
+> 寄存器: 188~190
+>
+> start: 188;   length: 2*3
+>
+> 指令:
+>
+> ``` json
+> {
+> 	"cmd":17
+> }
+> ```
+>
+> 返回值:
+>
+> ``` json
+> {
+> 	"res":0,
+> 	"cmd":17,
+>     "sysRunTime": 2186,
+> 	"rollerNumber":9,
+> 	"rollerSize":794,
+>     "bearingSize":3904
+> }
+> ```
+>
+> rollerNumber: 滚动体个数
+>
+> rollerSize:滚动体直径
+>
+> bearingSize:轴承节径
+
+
+
+### 获取alpha接触角与叶片数/输入侧齿数
+
+> 寄存器: 191~192
+>
+> start: 191;   length: 2*2
+>
+> 指令:
+>
+> ``` json
+> {
+> 	"cmd":18
+> }
+> ```
+>
+> 返回值:
+>
+> ``` json
+> {
+> 	"res":0,
+> 	"cmd":18,
+>     "sysRunTime": 2186,
+> 	"alphaAngular":0,
+> 	"teethNumber":8
+> }
+> ```
+>
+> alphaAngular: alpha角
+>
+> teethNumber:叶片数/输入侧齿数
+
+
+
+### 获取当前的诊断场景与诊断类型
+
+> 寄存器: 193~194
+>
+> start: 193;   length: 2*2
+>
+> 指令:
+>
+> ``` json
+> {
+> 	"cmd":19
+> }
+> ```
+>
+> 返回值:
+>
+> ``` json
+> {
+> 	"res":0,
+> 	"cmd":19,
+>     "sysRunTime": 2186,
+> 	"mode":3,
+> 	"target":1
+> }
+> ```
+>
+> mode: 诊断场景
+>
+> /[1]:电机+风机 	[2]:电机+水泵	[3]:电机+齿轮箱
+>
+> target:诊断类型
+>
+> /[1]: 电机	[2]:旋转机械设备
+
+
+
+### 获取各类预警与报警门限
+
+> 寄存器: 195~214
+>
+> start: 193;   length: 2*20
+>
+> 指令:
+>
+> ``` json
+> {
+> 	"cmd":20
+> }
+> ```
+>
+> 返回值:
+>
+> ``` json
+> {
+> 	"res":0,
+> 	"cmd":20,
+>     "sysRunTime": 2186,
+> 	"x_accWarning":3,
+> 	"x_accError":5,
+>     "y_accWarning":3,
+> 	"y_accError":5,
+>     "z_accWarning":3,
+> 	"z_accError":5,
+>     "x_speedWarning": 5,
+>     "x_speedError": 7,
+>     "y_speedWarning": 5,
+>     "y_speedError": 7,
+>     "z_speedWarning": 5,
+>     "z_speedError": 7,
+>     "tempWarning":60,
+>     "tempError":65,
+>     "x_distanceWarning":5,
+>     "x_distanceError":7,
+>     "y_distanceWarning":5,
+>     "y_distanceError":7,
+>     "z_distanceWarning":5,
+>     "z_distanceError":7,
+> }
+> ```
+>
+> x_accWarning: 轴的加速度预警
+>
+> x_accError: 轴的加速度报警
+>
+> tempWarning: 温度预警
+>
+> tempError:温度报警
+>
+> x_distanceWarning: 轴的振动位移预警
+>
+> x_distanceError: 轴的振动位移报警
+
+
+
+### 获取振动位移的高通,低通截止频率与时域数据计算周期
+
+> 寄存器: 215~217
+>
+> start: 215;   length: 2*3
+>
+> 指令:
+>
+> ``` json
+> {
+> 	"cmd":21
+> }
+> ```
+>
+> 返回值:
+>
+> ``` json
+> {
+> 	"res":0,
+> 	"cmd":21,
+>     "sysRunTime": 2186,
+> 	"hpf_limit":10,
+> 	"lpf_limit":1000,
+>     "calcPeriod":3
+> }
+> ```
+>
+> hpf_limit: 高通截止频率 单位为Hz
+>
+> lpf_limit: 低通截止频率 单位为Hz
+>
+> calcPeriod: 时域数据计算周期 *0.5s 示例中为 3 * 0.5 = 1.5s
+
+
+
+----
 
 ## BLE控制端部分JSON指令
 
@@ -1124,6 +1382,275 @@
 >   ```
 >
 >   **寄存器号为167**
+
+
+
+### 写入传感器的转速测量值与传动比
+
+> 寄存器: 169~170
+>
+> start: 169;   length: 2*2
+>
+> 指令:
+>
+> ``` json
+> {
+> 	"cmd":16,
+>     	"measue_speed":100,
+> 	"proportion":50
+> }
+> ```
+>
+> 返回值:
+>
+> ``` json
+> {
+> 	"res":0,
+> 	"cmd":16,
+> }
+> ```
+>
+> measue_speed: 转速测量值(转/秒)
+>
+> proportion: 基础转速的比例系数
+
+
+
+### 写入传感器各关注点的转频倍数与关注带起始+结束点转频倍数
+
+> 寄存器: 171~187
+>
+> start: 171;   length: 2*17
+>
+> 指令:
+>
+> ``` json
+> {
+> 	"cmd":17,
+>     "point1_gain":0.5,
+> 	"point2_gain":1.0,
+>     "point3_gain":1.5,
+>     "point4_gain":2.0,
+>     "point5_gain":2.0,
+>     "point6_gain":2.0,
+>     "point7_gain":2.0,
+>     "point8_gain":2.0,
+>     "band1_startgain":0.45,
+>     "band1_endgain":0.45,
+> 	"band2_startgain":0.45,
+>     "band2_endgain":0.45,
+>     "band3_startgain":0.45,
+>     "band3_endgain":0.45,
+>     "band4_startgain":0.45,
+>     "band4_endgain":0.45,
+>     "band5_startgain":0.45,
+>     "band5_endgain":0.45
+> }
+> ```
+>
+> 返回值:
+>
+> ``` json
+> {
+> 	"res":0,
+> 	"cmd":17
+> }
+> ```
+
+
+
+### 写入滚动体个数, 滚动体直径与轴承节径
+
+> 寄存器: 188~190
+>
+> start: 188;   length: 2*3
+>
+> 指令:
+>
+> ``` json
+> {
+> 	"cmd":18,
+> 	"rollerNumber":9,
+> 	"rollerSize":794,
+>     "bearingSize":3904
+> }
+> ```
+>
+> 返回值:
+>
+> ``` json
+> {
+> 	"res":0,
+> 	"cmd":18
+> }
+> ```
+>
+> rollerNumber: 滚动体个数
+>
+> rollerSize:滚动体直径
+>
+> bearingSize:轴承节径
+
+
+
+### 写入alpha接触角与叶片数/输入侧齿数
+
+> 寄存器: 191~192
+>
+> start: 191;   length: 2*2
+>
+> 指令:
+>
+> ``` json
+> {
+> 	"cmd":19,
+> 	"alphaAngular":0,
+> 	"teethNumber":8
+> }
+> ```
+>
+> 返回值:
+>
+> ``` json
+> {
+> 	"res":0,
+> 	"cmd":19
+> }
+> ```
+>
+> alphaAngular: alpha角
+>
+> teethNumber:叶片数/输入侧齿数
+
+
+
+### 写入当前的诊断场景与诊断类型
+
+> 寄存器: 193~194
+>
+> start: 193;   length: 2*2
+>
+> 指令:
+>
+> ``` json
+> {
+> 	"cmd":20,
+> 	"mode":3,
+> 	"target":1
+> }
+> ```
+>
+> 返回值:
+>
+> ``` json
+> {
+> 	"res":0,
+> 	"cmd":20
+> }
+> ```
+>
+> mode: 诊断场景
+>
+> /[1]:电机+风机 	[2]:电机+水泵	[3]:电机+齿轮箱
+>
+> target:诊断类型
+>
+> /[1]: 电机	[2]:旋转机械设备
+
+
+
+### 获取各类预警与报警门限
+
+> 寄存器: 195~214
+>
+> start: 193;   length: 2*20
+>
+> 指令:
+>
+> ``` json
+> {
+> 	"cmd":21,
+> 	"x_accWarning":3,
+> 	"x_accError":5,
+>     "y_accWarning":3,
+> 	"y_accError":5,
+>     "z_accWarning":3,
+> 	"z_accError":5,
+>     "x_speedWarning": 5,
+>     "x_speedError": 7,
+>     "y_speedWarning": 5,
+>     "y_speedError": 7,
+>     "z_speedWarning": 5,
+>     "z_speedError": 7,
+>     "tempWarning":60,
+>     "tempError":65,
+>     "x_distanceWarning":5,
+>     "x_distanceError":7,
+>     "y_distanceWarning":5,
+>     "y_distanceError":7,
+>     "z_distanceWarning":5,
+>     "z_distanceError":7,
+> }
+> ```
+>
+> 返回值:
+>
+> ``` json
+> {
+> 	"res":0,
+> 	"cmd":21
+> }
+> ```
+>
+> x_accWarning: 轴的加速度预警
+>
+> x_accError: 轴的加速度报警
+>
+> tempWarning: 温度预警
+>
+> tempError:温度报警
+>
+> x_distanceWarning: 轴的振动位移预警
+>
+> x_distanceError: 轴的振动位移报警
+
+
+
+### 获取振动位移的高通,低通截止频率与时域数据计算周期
+
+> 寄存器: 215~217
+>
+> start: 215;   length: 2*3
+>
+> 指令:
+>
+> ``` json
+> {
+> 	"cmd":22,
+> 	"hpf_limit":10,
+> 	"lpf_limit":1000,
+>     "calcPeriod":3
+> }
+> ```
+>
+> 返回值:
+>
+> ``` json
+> {
+> 	"res":0,
+> 	"cmd":22
+> }
+> ```
+>
+> hpf_limit: 高通截止频率 单位为Hz
+>
+> lpf_limit: 低通截止频率 单位为Hz
+>
+> calcPeriod: 时域数据计算周期 *0.5s 示例中为 3 * 0.5 = 1.5s
+
+
+
+----
 
 
 
