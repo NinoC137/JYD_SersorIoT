@@ -7,8 +7,8 @@ TFT_eSPI tft = TFT_eSPI();
 // The scrolling area must be a integral multiple of TEXT_HEIGHT
 #define TEXT_HEIGHT 16          // Height of text to be printed and scrolled
 #define BOT_FIXED_AREA 0        // Number of lines in bottom fixed area (lines counted from bottom of screen)
-#define TOP_FIXED_AREA 240 + 16 // Number of lines in top fixed area (lines counted from top of screen)
-#define YMAX 480                // Bottom of screen area
+#define TOP_FIXED_AREA 160 + 16 // Number of lines in top fixed area (lines counted from top of screen)
+#define YMAX 240                // Bottom of screen area
 
 // The initial y coordinate of the top of the scrolling area
 uint16_t yStart = TOP_FIXED_AREA;
@@ -51,8 +51,8 @@ void GUI_setup()
     
     //system debug log
     tft.setTextColor(TFT_WHITE, TFT_BLUE);
-    tft.fillRect(0, 240, 320, 16, TFT_BLUE);
-    tft.drawCentreString(" System Log - Nino", 160, 240, 2);
+    tft.fillRect(0, 160, 320, 16, TFT_BLUE);
+    tft.drawCentreString(" System Log - Nino", 160, 160, 2);
 
     // Change colour for scrolling zone text
     tft.setTextColor(TFT_WHITE, TFT_BLACK);
@@ -119,7 +119,7 @@ int scroll_line()
 // We are using a hardware feature of the display, so we can only scroll in portrait orientation
 void setupScrollArea(uint16_t tfa, uint16_t bfa)
 {
-    tft.writecommand(ST7796_VSCRDEF); // Vertical scroll definition
+    tft.writecommand(ST7789_VSCRDEF); // Vertical scroll definition
     tft.writedata(tfa >> 8);          // Top Fixed Area line count
     tft.writedata(tfa);
     tft.writedata((YMAX - tfa - bfa) >> 8); // Vertical Scrolling Area line count
@@ -133,7 +133,7 @@ void setupScrollArea(uint16_t tfa, uint16_t bfa)
 // ##############################################################################################
 void scrollAddress(uint16_t vsp)
 {
-    tft.writecommand(ST7796_VSCRSADD); // Vertical scrolling pointer
+    tft.writecommand(ST7789_VSCRSADD); // Vertical scrolling pointer
     tft.writedata(vsp >> 8);
     tft.writedata(vsp);
 }

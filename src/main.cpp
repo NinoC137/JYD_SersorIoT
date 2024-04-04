@@ -32,7 +32,7 @@ void setup()
 
   xTaskCreatePinnedToCore(SensorTaskThread, "SensorTask", 1024*4, NULL, 2, &IoTTaskHandle, 0);
 
-  // xTaskCreatePinnedToCore(GUITaskThread, "GUITask", 4096, NULL, 1, &IoTTaskHandle, 0);
+  xTaskCreatePinnedToCore(GUITaskThread, "GUITask", 4096, NULL, 1, &IoTTaskHandle, 0);
 
 }
 
