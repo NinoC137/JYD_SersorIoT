@@ -88,9 +88,9 @@ void SystemData_GUI(){
   GUI_sysPrint(0, 32, "                                                      ");
   GUI_sysPrint(0, 32, "ipv4 address: %s", WiFi.localIP().toString().c_str());
 
-  GUI_sysPrint(0, 192, "%04d-%02d-%02d %02d:%02d:%02d", timeinfo.tm_year + 1900, timeinfo.tm_mon + 1, timeinfo.tm_mday,
+  GUI_sysPrint(0, 102, "%04d-%02d-%02d %02d:%02d:%02d", timeinfo.tm_year + 1900, timeinfo.tm_mon + 1, timeinfo.tm_mday,
                 timeinfo.tm_hour, timeinfo.tm_min, timeinfo.tm_sec);
-  GUI_sysPrint(0, 208, "last update date: %s", __DATE__);
+  GUI_sysPrint(0, 128, "last update date: %s", __DATE__);
 }
 
 void loop()
