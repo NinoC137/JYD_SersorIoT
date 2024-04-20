@@ -2,6 +2,9 @@
 #define _GUI_DRIVER__H
 
 #include "TFT_eSPI.h"
+#include <lvgl.h>
+#include <gui_guider.h>
+#include <events_init.h>
 
 void GUI_setup();
 

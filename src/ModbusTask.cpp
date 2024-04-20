@@ -64,7 +64,7 @@ void handleError(Error error, uint32_t token)
 void Modbus_Init(){
 // Set up Serial2 connected to Modbus RTU
   RTUutils::prepareHardwareSerial(Serial2);
-  Serial2.begin(9600, SERIAL_8N1, GPIO_NUM_17, GPIO_NUM_16);
+  Serial2.begin(9600, SERIAL_8N1, GPIO_NUM_41, GPIO_NUM_40);
 // Set up ModbusRTU client.
 // - provide onData handler function
   MB.onDataHandler(&handleData);

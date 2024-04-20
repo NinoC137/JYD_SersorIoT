@@ -39,8 +39,8 @@ void GUI_setup()
     disp_drv.draw_buf = &draw_buf;
     lv_disp_drv_register(&disp_drv);
 
-    setup_ui(&guider_ui);
-    events_init(&guider_ui);
+    // setup_ui(&guider_ui);
+    // events_init(&guider_ui);
 }
 
 void GUI_sysPrint(int32_t x, int32_t y, const char* str, ...){
