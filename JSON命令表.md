@@ -1664,24 +1664,24 @@
 >
 >   ```json
 >   {
->       "cmd": 16/17,
->       "device_id": "xxxxxxx",
+>       "cmd": "HeartBeat",
+>       "device_id": "xxxxxxxxx",
 >       "blestatus": 1,
 >       "wifistatus": 1,
 >       "sysRuntime": 2975,
->       "time": "2023-10-01 12:00:00"
+>       "time": "2024-4-9 12:00:00"
 >   }
 >   ```
 >
->   cmd：事件类型。16——通过Wifi向服务器发送；17——通过蓝牙向宿主机发送
+>   cmd：事件类型。
 >
->   device_id：设备ID，一般为设备Mac地址（Wifi）组成的字符串
+>   device_id：设备ID，为设备Mac地址（Wifi）组成的字符串
 >
 >   blestatus：蓝牙连接状态。0——未连接；1——已连接
 >
 >   wifistatus：Wifi连接状态。0——未连接；1——已连接
 >
->   sysRuntime: 设备运行的时间, 可以改为"时/分/秒"制, 也可以单纯按秒
+>   sysRuntime: 设备运行的时间, 按秒制
 >
 >   time：设备读取的世界时间
 >

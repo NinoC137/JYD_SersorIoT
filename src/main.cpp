@@ -1,18 +1,13 @@
 #include <Arduino.h>
 #include "FreeRTOS.h"
 #include "WiFi_BLE.h"
-#include "my_MPU6050.h"
 #include "GUI_Driver.h"
 #include "ModbusTask.h"
-
 
 char serial1_Buffer[256];
 
 void IoTTaskThread(void *argument);
 TaskHandle_t IoTTaskHandle;
-
-void SensorTaskThread(void *argument);
-TaskHandle_t SensorTaskHandle;
 
 void GUITaskThread(void *argument);
 TaskHandle_t GUITaskHandle;
@@ -30,20 +25,10 @@ void setup()
 
   xTaskCreatePinnedToCore(ModBusThread, "ModBusTask", 1024*4, NULL, 2, &ModBusHandle, 0);
 
-  xTaskCreatePinnedToCore(SensorTaskThread, "SensorTask", 1024*4, NULL, 2, &IoTTaskHandle, 0);
-
-  xTaskCreatePinnedToCore(GUITaskThread, "GUITask", 4096, NULL, 1, &IoTTaskHandle, 0);
+  // xTaskCreatePinnedToCore(GUITaskThread, "GUITask", 4096, NULL, 1, &IoTTaskHandle, 0);
 
 }
 
-void SensorTaskThread(void *argument){
-  MPU6050_setup();
-  for(;;){
-    MPU6050_getData();
-    MPU6050_SendJSONPack();
-    vTaskDelay(300);
-  }
-}
 
 void ModBusThread(void *argument){
   Modbus_Init();
@@ -57,11 +42,8 @@ void ModBusThread(void *argument){
 
 void GUITaskThread(void *argument){
   GUI_setup();
-  std::string GUI_logString = std::string(serial1_Buffer);
   for(;;){
-    // SystemData_GUI();
-    MPU6050_GUILog();
-    GUI_logPrint(GUI_logString);
+    SystemData_GUI();
     vTaskDelay(500);
   }
 }
@@ -78,7 +60,7 @@ void IoTTaskThread(void *argument){
     BLEHandler();
     WiFiHandler();
     ProjectDataUpdate();
-    vTaskDelay(100);
+    vTaskDelay(50);
   }
 }
 

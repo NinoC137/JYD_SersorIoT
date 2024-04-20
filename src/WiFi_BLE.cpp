@@ -158,6 +158,28 @@ void BLEHandler()
 
         switch (cmd->valueint)
         {
+            case 1: ble_cmd1(root); break;
+            case 2: ble_cmd2(root); break;
+            case 3: ble_cmd3(root); break;
+            case 4: ble_cmd4(root); break;
+            case 5: ble_cmd5(root); break;
+            case 6: ble_cmd6(root); break;
+            case 7: ble_cmd7(root); break;
+            case 8: ble_cmd8(root); break;
+            case 9: ble_cmd9(root); break;
+            case 10: ble_cmd10(root); break;
+            case 11: ble_cmd11(root); break;
+            case 12: ble_cmd12(root); break;
+            case 13: ble_cmd13(root); break;
+            case 14: ble_cmd14(root); break;
+            case 15: ble_cmd15(root); break;
+            case 16: ble_cmd16(root); break;
+            case 17: ble_cmd17(root); break;
+            case 18: ble_cmd18(root); break;
+            case 19: ble_cmd19(root); break;
+            case 20: ble_cmd20(root); break;
+            case 21: ble_cmd21(root); break;
+            case 22: ble_cmd22(root); break;
         default:
             Serial.printf("error cmd!\r\n");
             TX_Characteristics.setValue("received cmd: ERROR!");
