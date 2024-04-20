@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 NXP
+ * Copyright 2024 NXP
  * SPDX-License-Identifier: MIT
  * The auto-generated can only be used on NXP devices
  */
@@ -15,13 +15,8 @@ extern "C" {
 #include "font/lv_font.h"
 #endif
 
-LV_FONT_DECLARE(lv_font_simsun_14)
-LV_FONT_DECLARE(lv_font_montserratMedium_16)
-LV_FONT_DECLARE(lv_font_simsun_22)
-LV_FONT_DECLARE(lv_font_montserratMedium_14)
-LV_FONT_DECLARE(lv_font_simsun_13)
-LV_FONT_DECLARE(lv_font_simsun_12)
-LV_FONT_DECLARE(lv_font_montserratMedium_10)
+LV_FONT_DECLARE(lv_font_montserratMedium_12)
+LV_FONT_DECLARE(lv_font_simsun_18)
 
 
 #ifdef __cplusplus

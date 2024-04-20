@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 NXP
+ * Copyright 2024 NXP
  * SPDX-License-Identifier: MIT
  * The auto-generated can only be used on NXP devices
  */
@@ -7,7 +7,6 @@
 #include "lvgl.h"
 #include <stdio.h>
 #include "gui_guider.h"
-
 
 void ui_init_style(lv_style_t * style)
 {
@@ -19,12 +18,12 @@ void ui_init_style(lv_style_t * style)
 
 void init_scr_del_flag(lv_ui *ui)
 {
-	ui->btn_1_del = true;
+	ui->table_1_del = true;
 }
 
 void setup_ui(lv_ui *ui)
 {
 	init_scr_del_flag(ui);
-	setup_scr_btn_1(ui);
-	lv_scr_load(ui->btn_1);
+	setup_scr_table_1(ui);
+	lv_scr_load(ui->table_1);
 }

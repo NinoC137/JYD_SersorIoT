@@ -20,12 +20,12 @@ static void SystemData_GUI();
 void setup()
 {
   Serial.begin(115200);
-
+  
   xTaskCreatePinnedToCore(IoTTaskThread, "IoTTask", 1024*6, NULL, 2, &IoTTaskHandle, 1);
 
   xTaskCreatePinnedToCore(ModBusThread, "ModBusTask", 1024*4, NULL, 2, &ModBusHandle, 0);
 
-  // xTaskCreatePinnedToCore(GUITaskThread, "GUITask", 4096, NULL, 1, &IoTTaskHandle, 0);
+  xTaskCreatePinnedToCore(GUITaskThread, "GUITask", 4096, NULL, 1, &GUITaskHandle, 0);
 
 }
 
@@ -43,8 +43,8 @@ void ModBusThread(void *argument){
 void GUITaskThread(void *argument){
   GUI_setup();
   for(;;){
-    SystemData_GUI();
-    vTaskDelay(500);
+    lv_timer_handler();
+    vTaskDelay(3);
   }
 }
 
@@ -58,24 +58,30 @@ void IoTTaskThread(void *argument){
 
   for(;;){
     BLEHandler();
-    WiFiHandler();
+
+    if(WiFi.status() == WL_CONNECTED){
+      WiFiHandler();
+    }else{
+      WiFi.begin(STA_SSID, STA_PASS);
+      vTaskDelay(200);
+    }
+    
     ProjectDataUpdate();
     vTaskDelay(50);
   }
 }
 
 void SystemData_GUI(){
-  GUI_sysPrint(0, 16, "                                                      ");
-  GUI_sysPrint(0, 16, "WiFi Status: %s", WiFiStatus_str[ProjectData.wifistatus]);
-  GUI_sysPrint(0, 32, "                                                      ");
-  GUI_sysPrint(0, 32, "ipv4 address: %s", WiFi.localIP().toString().c_str());
-
-  GUI_sysPrint(0, 102, "%04d-%02d-%02d %02d:%02d:%02d", timeinfo.tm_year + 1900, timeinfo.tm_mon + 1, timeinfo.tm_mday,
-                timeinfo.tm_hour, timeinfo.tm_min, timeinfo.tm_sec);
+  // GUI_sysPrint(0, 16, "                                                      ");
+  // GUI_sysPrint(0, 16, "WiFi Status: %s", WiFiStatus_str[ProjectData.wifistatus]);
+  // GUI_sysPrint(0, 32, "                                                      ");
+  // GUI_sysPrint(0, 32, "ipv4 address: %s", WiFi.localIP().toString().c_str());
+  // GUI_sysPrint(0, 102, "%04d-%02d-%02d %02d:%02d:%02d", timeinfo.tm_year + 1900, timeinfo.tm_mon + 1, timeinfo.tm_mday,
+  //               timeinfo.tm_hour, timeinfo.tm_min, timeinfo.tm_sec);
   GUI_sysPrint(0, 128, "last update date: %s", __DATE__);
 }
 
 void loop()
 {
-  delay(500);
+  delay(1000);
 }

@@ -76,9 +76,6 @@ void ble_cmd2(cJSON *root)
     gmtOffset_sec = my_timezone * 3600;
     updateLocalTime();
 
-    //if (strcmp(timezone->valuestring, "8") == 0) {
-        // 如果符合预期，则设置响应消息
-
     cJSON *tx_root = cJSON_CreateObject();
     cJSON_AddItemToObject(tx_root, "res", cJSON_CreateNumber(0));
     cJSON_AddItemToObject(tx_root, "cmd", cJSON_CreateNumber(2));

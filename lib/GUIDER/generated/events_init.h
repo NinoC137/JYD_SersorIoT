@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 NXP
+ * Copyright 2024 NXP
  * SPDX-License-Identifier: MIT
  * The auto-generated can only be used on NXP devices
  */
@@ -14,7 +14,6 @@ extern "C" {
 #include "gui_guider.h"
 
 void events_init(lv_ui *ui);
-void events_init_btn_1(lv_ui *ui);
 
 #ifdef __cplusplus
 }

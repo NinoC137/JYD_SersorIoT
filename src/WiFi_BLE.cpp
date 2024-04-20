@@ -1,6 +1,7 @@
 #include "WiFi_BLE.h"
 #include "cmd_Parse.h"
 #include "wifiFix.h"
+#include "GUI_Driver.h"
 WiFiClient* wifi = new WiFiClientFixed();
 
 char WiFiStatus_str[2][30] = {
@@ -67,13 +68,14 @@ void WiFi_BLE_setUp()
     WiFi_Data.WiFi_store[0].SSID = (char *)STA_SSID;
     WiFi_Data.WiFi_store[0].PassWord = (char *)STA_PASS;
 
+    vTaskDelay(1000);
     WiFi.mode(WIFI_STA);
     WiFi.begin(WiFi_Data.WiFi_store[0].SSID, WiFi_Data.WiFi_store[0].PassWord);
 
     static int counter;
     while (WiFi.status() != WL_CONNECTED && counter < 5)
     {
-        delay(100);
+        vTaskDelay(100);
         WiFi.begin(WiFi_Data.WiFi_store[0].SSID, WiFi_Data.WiFi_store[0].PassWord);
         counter++;
     }
@@ -87,6 +89,7 @@ void WiFi_BLE_setUp()
     {
         WiFi_Data.WiFi_store[0].devID.erase(pos, 1);
         pos = WiFi_Data.WiFi_store[0].devID.find(":");
+        static int counter;
     }
 
     if (WiFi.status() == WL_CONNECTED)
@@ -245,15 +248,11 @@ void ProjectDataUpdate()
     updateLocalTime();
     static int cnt_dataupdate;
 
-    if (WiFi.status() == WL_CONNECTED)
-    {
-        ProjectData.wifistatus = 0;
-        Serial.printf("WiFi connected. IPv4:%s\r\n", WiFi.localIP().toString().c_str());
-    }
-    else
-    {
-        ProjectData.wifistatus = 1;
-        WiFi.begin(STA_SSID, STA_PASS);
+    Serial.printf("Dev IPv4:%s\r\n", WiFi.localIP().toString().c_str());
+    if(WiFi.status() == WL_CONNECTED){
+       ProjectData.wifistatus = 0; 
+    }else{
+       ProjectData.wifistatus = 1; 
     }
 
     if (ProjectData.runTime >= ProjectData.worktime)

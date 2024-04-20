@@ -2,10 +2,12 @@
 
 #include <stdarg.h>
 
-lv_disp_draw_buf_t draw_buf;     // 定义显示器变量完
-lv_color_t buf[TFT_WIDTH * 350]; // 定义刷新缓存
+lv_disp_draw_buf_t draw_buf;     // 定义buffer结构体
+lv_color_t buf[TFT_WIDTH * 60]; // 定义刷新缓存
 
 TFT_eSPI tft = TFT_eSPI();
+
+lv_ui guider_ui;
 
 void my_disp_flush(lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t *color_p)
 {
@@ -23,12 +25,12 @@ void my_disp_flush(lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t *color
 void GUI_setup()
 {
     tft.init();
-    tft.setRotation(0);
+    tft.setRotation(1);
 
     tft.fillScreen(TFT_BLACK);
 
     lv_init();
-    lv_disp_draw_buf_init(&draw_buf, buf, NULL, TFT_WIDTH * 100);
+    lv_disp_draw_buf_init(&draw_buf, buf, NULL, TFT_WIDTH * 60);
 
     // 定义屏幕
     static lv_disp_drv_t disp_drv;
@@ -39,8 +41,8 @@ void GUI_setup()
     disp_drv.draw_buf = &draw_buf;
     lv_disp_drv_register(&disp_drv);
 
-    // setup_ui(&guider_ui);
-    // events_init(&guider_ui);
+    setup_ui(&guider_ui);
+    events_init(&guider_ui);
 }
 
 void GUI_sysPrint(int32_t x, int32_t y, const char* str, ...){
