@@ -47,11 +47,12 @@ static void sendMsg(ModbusMessage msg){
 
 void handleData(ModbusMessage response, uint32_t token) 
 {
-  Serial.printf("Response: serverID=%d, FC=%d, Token=%08X, length=%d:\n", response.getServerID(), response.getFunctionCode(), token, response.size());
+  // Serial.printf("Response: serverID=%d, FC=%d, Token=%08X, length=%d:\n", response.getServerID(), response.getFunctionCode(), token, response.size());
   for (auto& byte : response) {
-    Serial.printf("%02X ", byte);
+    // Serial.printf("%02X ", byte);
+    
   }
-  Serial.println("");
+  // Serial.println("");
 }
 
 void handleError(Error error, uint32_t token) 
@@ -64,7 +65,8 @@ void handleError(Error error, uint32_t token)
 void Modbus_Init(){
 // Set up Serial2 connected to Modbus RTU
   RTUutils::prepareHardwareSerial(Serial2);
-  Serial2.begin(9600, SERIAL_8N1, GPIO_NUM_41, GPIO_NUM_40);
+  Serial2.begin(9600);
+  Serial2.setPins(GPIO_NUM_41, GPIO_NUM_40);
 // Set up ModbusRTU client.
 // - provide onData handler function
   MB.onDataHandler(&handleData);
@@ -79,29 +81,20 @@ void Modbus_Init(){
 
 void Modbus_getRegisterValue(uint16_t startAddress, uint16_t dataLength){
     static uint32_t Token = 0;
-// Create request for
-// (Fill in your data here!)
-// - server ID = 1
-// - function code = 0x03 (read holding register)
-// - address to read = word 0
-// - data words to read = 3
-// - token to match the response with the request.
-//
-// If something is missing or wrong with the call parameters, we will immediately get an error code 
-// and the request will not be issued
-    uint16_t crcValue[4];
-    crcValue[0] = 0x0103;
-    crcValue[1] = startAddress;
-    crcValue[2] = dataLength;
-    calculateCRC16(crcValue, 3, &crcValue[3]);
+    // uint16_t crcValue[4];
+    // crcValue[0] = 0x0103;
+    // crcValue[1] = startAddress;
+    // crcValue[2] = dataLength;
+    // calculateCRC16(crcValue, 3, &crcValue[3]);
 
     ModbusMessage msg;
     msg.setMessage(1, READ_HOLD_REGISTER, startAddress, dataLength);
-    msg.add(crcValue[3]);
+    //msg.add(crcValue[3]);
     // printMsg(msg);
+    // sendMsg(msg);
 
     Error err = MB.addRequest(msg, Token++);
-
+    
     if (err != SUCCESS) {
         ModbusError e(err);
         Serial.printf("Error creating request: %02X - %s\n", (int)e, (const char *)e);

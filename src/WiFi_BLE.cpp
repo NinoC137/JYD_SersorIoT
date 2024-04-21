@@ -221,9 +221,27 @@ void WiFiHandler()
 
             switch (cmd->valueint)
             {
-            case 1:
-                cmd1(root);
-                break;
+            case 1: wifi_cmd1(root); break;
+            case 2: wifi_cmd2(root); break;
+            case 3: wifi_cmd3(root); break;
+            case 4: wifi_cmd4(root); break;
+            case 5: wifi_cmd5(root); break;
+            case 6: wifi_cmd6(root); break;
+            case 7: wifi_cmd7(root); break;
+            case 8: wifi_cmd8(root); break;
+            case 9: wifi_cmd9(root); break;
+            case 10: wifi_cmd10(root); break;
+            case 11: wifi_cmd11(root); break;
+            case 12: wifi_cmd12(root); break;
+            case 13: wifi_cmd13(root); break;
+            case 14: wifi_cmd14(root); break;
+            case 15: wifi_cmd15(root); break;
+            case 16: wifi_cmd16(root); break;
+            case 17: wifi_cmd17(root); break;
+            case 18: wifi_cmd18(root); break;
+            case 19: wifi_cmd19(root); break;
+            case 20: wifi_cmd20(root); break;
+            case 21: wifi_cmd21(root); break;
             default:
                 Serial.printf("error cmd!\r\n");
                 std::string post_Payload("something error.");
@@ -253,6 +271,7 @@ void ProjectDataUpdate()
        ProjectData.wifistatus = 0; 
     }else{
        ProjectData.wifistatus = 1; 
+       WiFi.begin(WiFi_Data.WiFi_store[0].SSID, WiFi_Data.WiFi_store[0].PassWord);
     }
 
     if (ProjectData.runTime >= ProjectData.worktime)

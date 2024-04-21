@@ -1,7 +1,7 @@
 #include "cmd_Parse.h"
 #include "ModbusTask.h"
 
-void cmd1(cJSON *root){
+void wifi_cmd1(cJSON *root){
     cJSON *tx_root = cJSON_CreateObject();
     cJSON_AddItemToObject(tx_root, "res", cJSON_CreateNumber(0));
     cJSON_AddItemToObject(tx_root, "cmd", cJSON_CreateNumber(1));
@@ -31,6 +31,86 @@ void cmd1(cJSON *root){
     free(json_string);
 }
 
+void wifi_cmd2(cJSON *root){
+
+}
+
+void wifi_cmd3(cJSON *root){
+
+}
+
+void wifi_cmd4(cJSON *root){
+
+}
+
+void wifi_cmd5(cJSON *root){
+
+}
+
+void wifi_cmd6(cJSON *root){
+
+}
+
+void wifi_cmd7(cJSON *root){
+
+}
+
+void wifi_cmd8(cJSON *root){
+
+}
+
+void wifi_cmd9(cJSON *root){
+
+}
+
+void wifi_cmd10(cJSON *root){
+
+}
+
+void wifi_cmd11(cJSON *root){
+
+}
+
+void wifi_cmd12(cJSON *root){
+
+}
+
+void wifi_cmd13(cJSON *root){
+
+}
+
+void wifi_cmd15(cJSON *root){
+
+}
+
+void wifi_cmd16(cJSON *root){
+
+}
+
+void wifi_cmd14(cJSON *root){
+
+}
+
+void wifi_cmd17(cJSON *root){
+
+}
+
+void wifi_cmd18(cJSON *root){
+
+}
+
+void wifi_cmd19(cJSON *root){
+
+}
+
+void wifi_cmd20(cJSON *root){
+
+}
+
+void wifi_cmd21(cJSON *root){
+
+}
+
 //设定WiFi账号与密码
 void ble_cmd1(cJSON *root)
 {
@@ -45,7 +125,9 @@ void ble_cmd1(cJSON *root)
     }
 
     // BLE_Data.WiFi_store[cmd_idx->valueint].SSID = cmd_ssid->valuestring;
-
+    WiFi_Data.WiFi_store[0].SSID = cmd_ssid->valuestring;
+    WiFi_Data.WiFi_store[0].PassWord = cmd_psw->valuestring;
+    WiFi.begin(WiFi_Data.WiFi_store[0].SSID, WiFi_Data.WiFi_store[0].PassWord);
 
     cJSON *tx_root = cJSON_CreateObject();
     cJSON_AddItemToObject(tx_root, "res", cJSON_CreateNumber(0));
@@ -75,6 +157,9 @@ void ble_cmd2(cJSON *root)
     my_timezone = cmd_timezone->valueint;
     gmtOffset_sec = my_timezone * 3600;
     updateLocalTime();
+
+    //if (strcmp(timezone->valuestring, "8") == 0) {
+        // 如果符合预期，则设置响应消息
 
     cJSON *tx_root = cJSON_CreateObject();
     cJSON_AddItemToObject(tx_root, "res", cJSON_CreateNumber(0));

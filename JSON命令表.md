@@ -1001,8 +1001,8 @@
 > ``` json
 > {
 >     "cmd": 1,
->     "ssid": "ssid1",
->     "psw": "12345678"
+>     "ssid": "GDUT-HUAWEI",
+>     "psw": "AlwaysBe1@"
 > }
 > ```
 >
