@@ -6,11 +6,10 @@ void wifi_cmd1(cJSON *root){
     cJSON_AddItemToObject(tx_root, "res", cJSON_CreateNumber(0));
     cJSON_AddItemToObject(tx_root, "cmd", cJSON_CreateNumber(1));
 
-    static int x = 0,y = 0,z = 0;
-
-    cJSON_AddItemToObject(tx_root, "X_SPEED", cJSON_CreateNumber(x++));
-    cJSON_AddItemToObject(tx_root, "Y_SPEED", cJSON_CreateNumber(y++));
-    cJSON_AddItemToObject(tx_root, "Z_SPEED", cJSON_CreateNumber(z++));
+    cJSON_AddItemToObject(tx_root, "sysRunTime", cJSON_CreateNumber(ProjectData.runTime));
+    cJSON_AddItemToObject(tx_root, "x_speed", cJSON_CreateNumber(JYD_OriginalData.x_speed));
+    cJSON_AddItemToObject(tx_root, "y_speed", cJSON_CreateNumber(JYD_OriginalData.y_speed));
+    cJSON_AddItemToObject(tx_root, "z_speed", cJSON_CreateNumber(JYD_OriginalData.z_speed));
     
     char* json_string = cJSON_Print(tx_root);
 
