@@ -1,5 +1,8 @@
 #include "ModbusTask.h"
 
+JYD_OriginalData_t JYD_OriginalData;
+extern uint8_t states; //来自main.cpp中modbus线程
+
 // Create a ModbusRTU client instance
 ModbusClientRTU MB;
 
@@ -19,6 +22,13 @@ static inline void calculateCRC16(const uint16_t *data, size_t length, uint16_t 
     crc_tmp = (((crc_tmp) & 0x00FF) << 8 | ((crc_tmp) & 0xFF00) >> 8);
     *result = crc_tmp;
     crc.restart();
+}
+
+static inline uint16_t combineUint8ToUint16(uint8_t highByte, uint8_t lowByte) {
+    uint16_t result;
+    // 将高位字节左移8位，低位字节不需要移动
+    result = ((uint16_t)highByte << 8) | lowByte;
+    return result;
 }
 
 static void printMsg(ModbusMessage msg) {
@@ -47,12 +57,30 @@ static void sendMsg(ModbusMessage msg){
 
 void handleData(ModbusMessage response, uint32_t token) 
 {
+  uint8_t *responseData = new uint8_t(256);
+  uint16_t i = 0;
   // Serial.printf("Response: serverID=%d, FC=%d, Token=%08X, length=%d:\n", response.getServerID(), response.getFunctionCode(), token, response.size());
   for (auto& byte : response) {
     // Serial.printf("%02X ", byte);
-    
+    i++;
+    responseData[i] = byte; //将数据转存到缓冲区
   }
-  // Serial.println("");
+
+  if(responseData[0] == 0x01 && responseData[1] == 0x03){ //如果包头为数据接收包头 [0] [1] [2]都是包头, 不属于传感器值
+        switch (states) //根据当前处在哪个states,来进行对应数据的解析
+    {
+        case 0:
+            /* 处理 states = 0 的情况 */
+            JYD_OriginalData.x_speed = combineUint8ToUint16(responseData[3], responseData[4]);
+            JYD_OriginalData.y_speed = combineUint8ToUint16(responseData[5], responseData[6]);
+            JYD_OriginalData.z_speed = combineUint8ToUint16(responseData[7], responseData[8]);
+            break;
+        case 1:
+            /* 处理 states = 1 的情况 */
+            break;
+    }
+  }
+  delete(responseData);
 }
 
 void handleError(Error error, uint32_t token) 

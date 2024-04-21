@@ -8,6 +8,8 @@ char WiFiStatus_str[2][30] = {
     "WiFi_Connect",
     "WiFi_notConnect"};
 
+currentWiFicmd currentWiFiCMD = cmd0;
+
 WiFiClient client; // ESP32设置为客户端, TCP连接服务器
 const IPAddress serverIP(192, 168, 1, 1);
 uint16_t serverPort = 8888;
@@ -37,6 +39,8 @@ ProjectDataPacket ProjectData;
 // CRC+MD5校验信息
 //  char md5CRC[32] = {0};
 //  MD5Builder md5Check;
+
+
 
 //-----------网络时间获取-----------//
 const char *ntpServer = "pool.ntp.org"; // 网络时间服务器

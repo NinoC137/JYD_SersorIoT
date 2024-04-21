@@ -18,6 +18,33 @@
 #define STA_SSID "GDUT-HUAWEI"
 #define STA_PASS "AlwaysBe1@"
 
+typedef enum {
+  cmd0,
+  cmd1,
+  cmd2,
+  cmd3,
+  cmd4,
+  cmd5,
+  cmd6,
+  cmd7,
+  cmd8,
+  cmd9,
+  cmd10,
+  cmd11,
+  cmd12,
+  cmd13,
+  cmd14,
+  cmd15,
+  cmd16,
+  cmd17,
+  cmd18,
+  cmd19,
+  cmd20,
+  cmd21
+}currentWiFicmd;
+
+extern currentWiFicmd currentWiFiCMD;
+
 class WiFiData{
 public:
   struct WiFiIndex
