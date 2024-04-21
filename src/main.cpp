@@ -33,14 +33,13 @@ uint8_t states = 0;
 void ModBusThread(void *argument){
   Modbus_Init();
   Modbus_configSingleRegister(163, 3);  //配置波特率为9600(默认配置)
-  Modbus_getRegisterValue(0, 7);
   for(;;){
     switch(states){
       case 0: Modbus_getRegisterValue(0, 156); states = 1; break;  //读0~156寄存器 
       case 1: Modbus_getRegisterValue(161, 57); states = 0; break; //读161~217寄存器 
       default: states = 0; break;
     }
-    vTaskDelay(100);
+    vTaskDelay(270);
   } 
 }
 
