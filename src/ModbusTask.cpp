@@ -66,15 +66,18 @@ static void sendMsg(ModbusMessage msg)
 
 void handleData(ModbusMessage response, uint32_t token)
 {
-  uint8_t *responseData = (uint8_t *)malloc(512);
+  // uint8_t *responseData = (uint8_t *)malloc(512);
+  const uint8_t *responseData;
   uint16_t i = 0;
   // Serial.printf("Response: serverID=%d, FC=%d, Token=%08X, length=%d:\n", response.getServerID(), response.getFunctionCode(), token, response.size());
-  for (auto &byte : response)
-  {
-    // Serial.printf("%02x", byte);
-    responseData[i] = byte;
-    i++;
-  }
+  // for (auto &byte : response)
+  // {
+  //   // Serial.printf("%02x", byte);
+  //   responseData[i] = byte;
+  //   i++;
+  // }
+
+  responseData = response.data();
 
   if (response.getServerID() == 0x01 && response.getFunctionCode() == 0x03) // 数据[0] [1] [2]都是接收包头, 不属于传感器值
   { 
@@ -297,7 +300,7 @@ void handleData(ModbusMessage response, uint32_t token)
       break;
     }
   }
-  free(responseData);
+  // free(responseData);
 }
 
 void handleError(Error error, uint32_t token)

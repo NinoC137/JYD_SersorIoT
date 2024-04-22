@@ -78,47 +78,56 @@ void SystemData_GUI(){
   GUI_sysPrint(0, 128, "last update date: %s", __DATE__);
 }
 
+uint8_t dataLogMode = 0;
 void loop()
 {
-  // Serial.printf("---------------JYD Original Data-----------------\r\n");
 
-  // Serial.printf("x_speed: %u\n", JYD_OriginalData.x_speed);
-  // Serial.printf("x_acc: %u\n", JYD_OriginalData.x_acc);
-  // Serial.printf("z_speed: %u\n", JYD_OriginalData.z_speed);
-  // Serial.printf("temp: %d\n", JYD_OriginalData.temp);
-  // // 中间省略部分
-  // Serial.printf("xSpeed_point_1: %u\n", JYD_OriginalData.xSpeed_point_1);
-  // Serial.printf("xSpeed_point_2: %u\n", JYD_OriginalData.xSpeed_point_2);
-  // // 中间省略部分
-  // Serial.printf("xSpeed_paddle_eigenvalue_1: %u\n", JYD_OriginalData.xSpeed_paddle_eigenvalue_1);
-  // Serial.printf("xSpeed_paddle_eigenvalue_2: %u\n", JYD_OriginalData.xSpeed_paddle_eigenvalue_2);
-  // // 中间省略部分
-  // Serial.printf("xAcc_point_1: %u\n", JYD_OriginalData.xAcc_point_1);
-  // Serial.printf("xAcc_point_2: %u\n", JYD_OriginalData.xAcc_point_2);
-  // // 中间省略部分
-  // Serial.printf("yAcc_inside_eigenvalue: %u\n", JYD_OriginalData.yAcc_inside_eigenvalue);
-  // Serial.printf("yAcc_outside_eigenvalue: %u\n", JYD_OriginalData.yAcc_outside_eigenvalue);
-  // // 中间省略部分
-  // Serial.printf("ySpeed_channalID: %u\n", JYD_OriginalData.ySpeed_channalID);
-  // Serial.printf("ySpeed_rotate_speed: %u\n", JYD_OriginalData.ySpeed_rotate_speed);
-  // // 中间省略部分
-  // Serial.printf("ySpeed_band_8: %u\n", JYD_OriginalData.ySpeed_band_8);
-  // Serial.printf("ySpeed_maxpower_order: %u\n", JYD_OriginalData.ySpeed_maxpower_order);
-  // Serial.printf("ySpeed_total_power: %u\n", JYD_OriginalData.ySpeed_total_power);
-  // // 中间省略部分
-  // Serial.printf("yAcc_point_1: %u\n", JYD_OriginalData.yAcc_point_1);
-  // Serial.printf("yAcc_point_2: %u\n", JYD_OriginalData.yAcc_point_2);
-  // // 中间省略部分
-  // Serial.printf("zSpeed_point_1: %u\n", JYD_OriginalData.zSpeed_point_1);
-  // Serial.printf("zSpeed_point_2: %u\n", JYD_OriginalData.zSpeed_point_2);
-  // // 中间省略部分
-  // Serial.printf("zAcc_point_1: %u\n", JYD_OriginalData.zAcc_point_1);
-  // Serial.printf("zAcc_point_2: %u\n", JYD_OriginalData.zAcc_point_2);
-  // // 中间省略部分
-  // Serial.printf("hpf_limit: %u\n", JYD_OriginalData.hpf_limit);
-  // Serial.printf("lpf_limit: %u\n", JYD_OriginalData.lpf_limit);
-  // Serial.printf("calcPeriod: %u\n", JYD_OriginalData.calcPeriod);
+  if(dataLogMode == 1){
+    Serial.printf("---------------JYD Original Data-----------------\r\n");
 
-  // Serial.printf("-----------------------------------------\r\n");
+    Serial.printf("x_speed: %u\n", JYD_OriginalData.x_speed);
+    Serial.printf("x_acc: %u\n", JYD_OriginalData.x_acc);
+    Serial.printf("z_speed: %u\n", JYD_OriginalData.z_speed);
+    Serial.printf("temp: %d\n", JYD_OriginalData.temp);
+    // 中间省略部分
+    Serial.printf("xSpeed_point_1: %u\n", JYD_OriginalData.xSpeed_point_1);
+    Serial.printf("xSpeed_point_2: %u\n", JYD_OriginalData.xSpeed_point_2);
+    // 中间省略部分
+    Serial.printf("xSpeed_paddle_eigenvalue_1: %u\n", JYD_OriginalData.xSpeed_paddle_eigenvalue_1);
+    Serial.printf("xSpeed_paddle_eigenvalue_2: %u\n", JYD_OriginalData.xSpeed_paddle_eigenvalue_2);
+    // 中间省略部分
+    Serial.printf("xAcc_point_1: %u\n", JYD_OriginalData.xAcc_point_1);
+    Serial.printf("xAcc_point_2: %u\n", JYD_OriginalData.xAcc_point_2);
+    // 中间省略部分
+    Serial.printf("yAcc_inside_eigenvalue: %u\n", JYD_OriginalData.yAcc_inside_eigenvalue);
+    Serial.printf("yAcc_outside_eigenvalue: %u\n", JYD_OriginalData.yAcc_outside_eigenvalue);
+    // 中间省略部分
+    Serial.printf("ySpeed_channalID: %u\n", JYD_OriginalData.ySpeed_channalID);
+    Serial.printf("ySpeed_rotate_speed: %u\n", JYD_OriginalData.ySpeed_rotate_speed);
+    // 中间省略部分
+    Serial.printf("ySpeed_band_8: %u\n", JYD_OriginalData.ySpeed_band_8);
+    Serial.printf("ySpeed_maxpower_order: %u\n", JYD_OriginalData.ySpeed_maxpower_order);
+    Serial.printf("ySpeed_total_power: %u\n", JYD_OriginalData.ySpeed_total_power);
+    // 中间省略部分
+    Serial.printf("yAcc_point_1: %u\n", JYD_OriginalData.yAcc_point_1);
+    Serial.printf("yAcc_point_2: %u\n", JYD_OriginalData.yAcc_point_2);
+    // 中间省略部分
+    Serial.printf("zSpeed_point_1: %u\n", JYD_OriginalData.zSpeed_point_1);
+    Serial.printf("zSpeed_point_2: %u\n", JYD_OriginalData.zSpeed_point_2);
+    // 中间省略部分
+    Serial.printf("zAcc_point_1: %u\n", JYD_OriginalData.zAcc_point_1);
+    Serial.printf("zAcc_point_2: %u\n", JYD_OriginalData.zAcc_point_2);
+    // 中间省略部分
+    Serial.printf("hpf_limit: %u\n", JYD_OriginalData.hpf_limit);
+    Serial.printf("lpf_limit: %u\n", JYD_OriginalData.lpf_limit);
+    Serial.printf("calcPeriod: %u\n", JYD_OriginalData.calcPeriod);
+
+    Serial.printf("-----------------------------------------\r\n");
+  }
+
+  if(WiFi.status() != WL_CONNECTED){
+    WiFi.begin(WiFi_Data.WiFi_store[0].SSID, WiFi_Data.WiFi_store[0].PassWord);
+  }
+  
   delay(1000);
 }

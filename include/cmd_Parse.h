@@ -47,5 +47,6 @@ void ble_cmd19(cJSON *root);
 void ble_cmd20(cJSON *root);
 void ble_cmd21(cJSON *root);
 void ble_cmd22(cJSON *root);
+void ble_cmd23(cJSON *root);
 
 #endif // !_CMD_PARSE_H

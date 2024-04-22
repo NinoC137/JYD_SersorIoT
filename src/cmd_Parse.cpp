@@ -1775,3 +1775,22 @@ void ble_cmd22(cJSON *root)
     cJSON_Delete(tx_root);
     free(json_string);
 }
+
+extern uint8_t dataLogMode;
+void ble_cmd23(cJSON *root){
+    cJSON *cmd_dataLogMode = cJSON_GetObjectItem(root, "dataLog");
+
+    dataLogMode = cmd_dataLogMode->valueint;
+
+    cJSON *tx_root = cJSON_CreateObject();
+    cJSON_AddItemToObject(tx_root, "res", cJSON_CreateNumber(0));
+    cJSON_AddItemToObject(tx_root, "cmd", cJSON_CreateNumber(23));
+
+    char* json_string = cJSON_Print(tx_root);//转换成字符串
+
+    TX_Characteristics.setValue(json_string);
+    TX_Characteristics.notify();
+
+    cJSON_Delete(tx_root);
+    free(json_string);
+}

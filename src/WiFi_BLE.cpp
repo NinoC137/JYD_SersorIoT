@@ -187,6 +187,7 @@ void BLEHandler()
             case 20: ble_cmd20(root); break;
             case 21: ble_cmd21(root); break;
             case 22: ble_cmd22(root); break;
+            case 23: ble_cmd23(root); break;
         default:
             Serial.printf("error cmd!\r\n");
             TX_Characteristics.setValue("received cmd: ERROR!");
