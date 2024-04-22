@@ -29,14 +29,15 @@ void setup()
 
 }
 
-uint8_t states = 0;
+uint8_t parseState = 0, states = 0;
 void ModBusThread(void *argument){
   Modbus_Init();
   Modbus_configSingleRegister(163, 3);  //配置波特率为9600(默认配置)
   for(;;){
     switch(states){
-      case 0: Modbus_getRegisterValue(0, 156); states = 1; break;  //读0~156寄存器 
-      case 1: Modbus_getRegisterValue(161, 57); states = 0; break; //读161~217寄存器 
+      case 0: Modbus_getRegisterValue(0, 119); parseState = 0; states = 1; break;  //读0~119寄存器 
+      case 1: Modbus_getRegisterValue(120, 38); parseState = 1; states = 2; break;  //读120~157寄存器
+      case 2: Modbus_getRegisterValue(161, 57); parseState = 2; states = 0; break; //读161~217寄存器 
       default: states = 0; break;
     }
     vTaskDelay(270);
@@ -79,5 +80,45 @@ void SystemData_GUI(){
 
 void loop()
 {
+  // Serial.printf("---------------JYD Original Data-----------------\r\n");
+
+  // Serial.printf("x_speed: %u\n", JYD_OriginalData.x_speed);
+  // Serial.printf("x_acc: %u\n", JYD_OriginalData.x_acc);
+  // Serial.printf("z_speed: %u\n", JYD_OriginalData.z_speed);
+  // Serial.printf("temp: %d\n", JYD_OriginalData.temp);
+  // // 中间省略部分
+  // Serial.printf("xSpeed_point_1: %u\n", JYD_OriginalData.xSpeed_point_1);
+  // Serial.printf("xSpeed_point_2: %u\n", JYD_OriginalData.xSpeed_point_2);
+  // // 中间省略部分
+  // Serial.printf("xSpeed_paddle_eigenvalue_1: %u\n", JYD_OriginalData.xSpeed_paddle_eigenvalue_1);
+  // Serial.printf("xSpeed_paddle_eigenvalue_2: %u\n", JYD_OriginalData.xSpeed_paddle_eigenvalue_2);
+  // // 中间省略部分
+  // Serial.printf("xAcc_point_1: %u\n", JYD_OriginalData.xAcc_point_1);
+  // Serial.printf("xAcc_point_2: %u\n", JYD_OriginalData.xAcc_point_2);
+  // // 中间省略部分
+  // Serial.printf("yAcc_inside_eigenvalue: %u\n", JYD_OriginalData.yAcc_inside_eigenvalue);
+  // Serial.printf("yAcc_outside_eigenvalue: %u\n", JYD_OriginalData.yAcc_outside_eigenvalue);
+  // // 中间省略部分
+  // Serial.printf("ySpeed_channalID: %u\n", JYD_OriginalData.ySpeed_channalID);
+  // Serial.printf("ySpeed_rotate_speed: %u\n", JYD_OriginalData.ySpeed_rotate_speed);
+  // // 中间省略部分
+  // Serial.printf("ySpeed_band_8: %u\n", JYD_OriginalData.ySpeed_band_8);
+  // Serial.printf("ySpeed_maxpower_order: %u\n", JYD_OriginalData.ySpeed_maxpower_order);
+  // Serial.printf("ySpeed_total_power: %u\n", JYD_OriginalData.ySpeed_total_power);
+  // // 中间省略部分
+  // Serial.printf("yAcc_point_1: %u\n", JYD_OriginalData.yAcc_point_1);
+  // Serial.printf("yAcc_point_2: %u\n", JYD_OriginalData.yAcc_point_2);
+  // // 中间省略部分
+  // Serial.printf("zSpeed_point_1: %u\n", JYD_OriginalData.zSpeed_point_1);
+  // Serial.printf("zSpeed_point_2: %u\n", JYD_OriginalData.zSpeed_point_2);
+  // // 中间省略部分
+  // Serial.printf("zAcc_point_1: %u\n", JYD_OriginalData.zAcc_point_1);
+  // Serial.printf("zAcc_point_2: %u\n", JYD_OriginalData.zAcc_point_2);
+  // // 中间省略部分
+  // Serial.printf("hpf_limit: %u\n", JYD_OriginalData.hpf_limit);
+  // Serial.printf("lpf_limit: %u\n", JYD_OriginalData.lpf_limit);
+  // Serial.printf("calcPeriod: %u\n", JYD_OriginalData.calcPeriod);
+
+  // Serial.printf("-----------------------------------------\r\n");
   delay(1000);
 }

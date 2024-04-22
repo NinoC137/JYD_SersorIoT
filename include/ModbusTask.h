@@ -11,7 +11,7 @@ typedef struct{
     uint16_t x_speed;   //100x
     uint16_t y_speed;   //100x
     uint16_t z_speed;   //100x
-    uint16_t temp;      //100x
+    int16_t temp;      //100x
     uint16_t x_acc;     //100x
     uint16_t y_acc;     //100x
     uint16_t z_acc;     //100x
@@ -33,10 +33,10 @@ typedef struct{
     uint16_t fft_count; //1x
     uint16_t xSpeed_channalID;
     uint16_t xSpeed_rotate_speed; //100x
-    uint16_t xSpeed_inside_eigenvalue; //100x
-    uint16_t xSpeed_outside_eigenvalue; //100x 
-    uint16_t xSpeed_roll_eigenvalue; //100x
-    uint16_t xSpeed_shell_eigenvalue; //100x
+    uint16_t xAcc_inside_eigenvalue; //100x
+    uint16_t xAcc_outside_eigenvalue; //100x 
+    uint16_t xAcc_roll_eigenvalue; //100x
+    uint16_t xAcc_shell_eigenvalue; //100x
     uint16_t xSpeed_point_1; //100x 
     uint16_t xSpeed_point_2; //100x
     uint16_t xSpeed_point_3; //100x
@@ -55,10 +55,10 @@ typedef struct{
     uint16_t xSpeed_band_8; //100x
     uint16_t xSpeed_maxpower_order; //10x
     uint16_t xSpeed_total_power; //100x
-    uint16_t xAcc_paddle_eigenvalue_1; //100x
-    uint16_t xAcc_paddle_eigenvalue_2; //100x
-    uint16_t xAcc_paddle_eigenvalue_3; //100x
-    uint16_t xAcc_paddle_eigenvalue_4; //100x
+    uint16_t xSpeed_paddle_eigenvalue_1; //100x,44
+    uint16_t xSpeed_paddle_eigenvalue_2; //100x,45
+    uint16_t xSpeed_paddle_eigenvalue_3; //100x,46
+    uint16_t xSpeed_paddle_eigenvalue_4; //100x,47
     uint16_t xAcc_point_1; //100x
     uint16_t xAcc_point_2; //100x
     uint16_t xAcc_point_3; //100x
@@ -79,10 +79,10 @@ typedef struct{
     uint16_t xAcc_total_power; //100x
     uint16_t ySpeed_channalID;
     uint16_t ySpeed_rotate_speed; //100x
-    uint16_t ySpeed_inside_eigenvalue; //100x
-    uint16_t ySpeed_outside_eigenvalue; //100x
-    uint16_t ySpeed_roll_eigenvalue; //100x
-    uint16_t ySpeed_shell_eigenvalue; //100x
+    uint16_t yAcc_inside_eigenvalue; //100x
+    uint16_t yAcc_outside_eigenvalue; //100x
+    uint16_t yAcc_roll_eigenvalue; //100x
+    uint16_t yAcc_shell_eigenvalue; //100x
     uint16_t ySpeed_point_1; //100x
     uint16_t ySpeed_point_2; //100x
     uint16_t ySpeed_point_3; //100x
@@ -125,10 +125,10 @@ typedef struct{
     uint16_t yAcc_total_power; //100x
     uint16_t zSpeed_channalID;
     uint16_t zSpeed_rotate_speed; //100x
-    uint16_t zSpeed_inside_eigenvalue; //100x
-    uint16_t zSpeed_outside_eigenvalue; //100x
-    uint16_t zSpeed_roll_eigenvalue; //100x
-    uint16_t zSpeed_shell_eigenvalue; //100x
+    uint16_t zAcc_inside_eigenvalue; //100x
+    uint16_t zAcc_outside_eigenvalue; //100x
+    uint16_t zAcc_roll_eigenvalue; //100x
+    uint16_t zAcc_shell_eigenvalue; //100x
     uint16_t zSpeed_point_1; //100x
     uint16_t zSpeed_point_2; //100x
     uint16_t zSpeed_point_3; //100x

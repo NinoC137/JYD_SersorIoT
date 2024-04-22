@@ -74,7 +74,7 @@
 // Try ONE option at a time to find the correct colour order for your display
 
 //  #define TFT_RGB_ORDER TFT_RGB  // Colour order Red-Green-Blue
-  #define TFT_RGB_ORDER TFT_BGR  // Colour order Blue-Green-Red
+#define TFT_RGB_ORDER TFT_BGR  // Colour order Blue-Green-Red
 
 // For M5Stack ESP32 module with integrated ILI9341 display ONLY, remove // in line below
 
@@ -85,11 +85,11 @@
 // #define TFT_WIDTH  128
 // #define TFT_WIDTH  172 // ST7789 172 x 320
 // #define TFT_WIDTH  170 // ST7789 170 x 320
-#define TFT_WIDTH  240 // ST7789 240 x 240 and 240 x 320
+ #define TFT_WIDTH  240 // ST7789 240 x 240 and 240 x 320
 // #define TFT_HEIGHT 160
 // #define TFT_HEIGHT 128
 // #define TFT_HEIGHT 240 // ST7789 240 x 240
-#define TFT_HEIGHT 320 // ST7789 240 x 320
+ #define TFT_HEIGHT 320 // ST7789 240 x 320
 // #define TFT_HEIGHT 240 // GC9A01 240 x 240
 
 // For ST7735 ONLY, define the type of display, originally this was based on the
@@ -213,8 +213,8 @@
 #define TFT_MOSI 16
 #define TFT_SCLK 17
 #define TFT_CS   13  // Chip select control pin
-#define TFT_DC   14  // Data Command control pin
-#define TFT_RST  15  // Reset pin (could connect to RST pin)
+#define TFT_DC    14  // Data Command control pin
+#define TFT_RST   15  // Reset pin (could connect to RST pin)
 //#define TFT_RST  -1  // Set TFT_RST to -1 if display RESET is connected to ESP32 board RST
 
 // For ESP32 Dev board (only tested with GC9A01 display)
@@ -360,8 +360,8 @@
 // #define SPI_FREQUENCY   5000000
 // #define SPI_FREQUENCY  10000000
 // #define SPI_FREQUENCY  20000000
- #define SPI_FREQUENCY  27000000
-// #define SPI_FREQUENCY  40000000
+//#define SPI_FREQUENCY  27000000
+ #define SPI_FREQUENCY  40000000
 // #define SPI_FREQUENCY  55000000 // STM32 SPI1 only (SPI2 maximum is 27MHz)
 // #define SPI_FREQUENCY  80000000
 
