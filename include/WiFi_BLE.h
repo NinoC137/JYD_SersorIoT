@@ -79,7 +79,7 @@ public:
   uint32_t freeHeap;
   float heapUsage;
   int8_t WiFi_dB;
-  int runTime;  //单位为秒
+  unsigned long runTime;  //单位为秒
 
   std::string device_ID;
 

@@ -15,6 +15,9 @@ TaskHandle_t GUITaskHandle;
 void ModBusThread(void *argument);
 TaskHandle_t ModBusHandle;
 
+void systemTicksThread(void *argument);
+TaskHandle_t systemTicksHandle;
+
 static void SystemData_GUI();
 
 void setup()
@@ -32,6 +35,7 @@ void setup()
 
   xTaskCreatePinnedToCore(GUITaskThread, "GUITask", 4096, NULL, 1, &GUITaskHandle, 0);
 
+  // xTaskCreatePinnedToCore(systemTicksThread, "TicksTask", 1024, NULL, 2, &systemTicksHandle, 0);
 }
 
 uint8_t parseState = 0, states = 0;
@@ -50,15 +54,22 @@ void ModBusThread(void *argument){
 }
 
 void GUITaskThread(void *argument){
+  uint8_t screenFreshCounter = 0;
   for(;;){
-    GUI_sysInfoUpdate();
+    screenFreshCounter++;
+    if(screenFreshCounter >= 30){
+      GUI_sysInfoUpdate();
+    }
     lv_timer_handler();
     vTaskDelay(3);
   }
 }
 
 void IoTTaskThread(void *argument){
+  const TickType_t xDelay = 50 / portTICK_PERIOD_MS;
+
   std::stringstream urlStream;
+  uint8_t updateCounter;
   urlStream << "http://" << WiFi_Data.serverip << ":" << WiFi_Data.serverport << "/cmd/connect";
   Serial.printf("Try to connect %s\r\n", urlStream.str().c_str());
 
@@ -67,8 +78,13 @@ void IoTTaskThread(void *argument){
 
   for(;;){
     BLEHandler();
-    WiFiHandler();
-    vTaskDelay(50);
+    if(ProjectData.wifistatus == 0){
+      WiFiHandler();
+    }
+
+    ProjectDataUpdate();
+
+    vTaskDelay(xDelay);
   }
 }
 
@@ -92,6 +108,7 @@ extern BLEServer *pServer;
 extern BLEService *pService;
 void loop()
 {
+  const TickType_t xDelay = 1000 / portTICK_PERIOD_MS;
   uint8_t BLE_key, screen_key;
   keyValueRead(&BLE_key, &screen_key);
 
@@ -140,15 +157,19 @@ void loop()
 
   if(WiFi.status() != WL_CONNECTED){
     WiFi.begin(WiFi_Data.WiFi_store[0].SSID, WiFi_Data.WiFi_store[0].PassWord);
+  }else{
+    WiFi_Data.WiFi_store[0].ipv4 = WiFi.localIP();
   }
 
-  WiFi_Data.WiFi_store[0].ipv4 = WiFi.localIP();
-
-  ProjectDataUpdate();
-  
   ProjectData.freeHeap = ESP.getFreeHeap(); 
   ProjectData.heapUsage = ((float)ProjectData.freeHeap / (float)ESP.getHeapSize()) * 100.0f;
-  ProjectData.WiFi_dB = (float)WiFi.RSSI();
+  ProjectData.WiFi_dB = (float)WiFi.RSSI() * 100;
 
-  delay(1000);
+  vTaskDelay(xDelay);
+}
+
+void systemTicksThread(void *argument){
+  const TickType_t xDelay = 1000 / portTICK_PERIOD_MS;
+  ProjectDataUpdate();
+  vTaskDelay(xDelay);
 }

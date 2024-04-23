@@ -139,7 +139,7 @@ void setup_scr_screen(lv_ui *ui)
 	lv_obj_set_style_anim_time(ui->screen_CPU_bar, 1000, 0);
 	lv_bar_set_mode(ui->screen_CPU_bar, LV_BAR_MODE_NORMAL);
 	lv_bar_set_range(ui->screen_CPU_bar, 0, 100);
-	lv_bar_set_value(ui->screen_CPU_bar, 50, LV_ANIM_OFF);
+	lv_bar_set_value(ui->screen_CPU_bar, 0, LV_ANIM_OFF);
 	lv_obj_set_pos(ui->screen_CPU_bar, 56, 156);
 	lv_obj_set_size(ui->screen_CPU_bar, 90, 20);
 

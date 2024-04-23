@@ -271,10 +271,10 @@ void WiFiHandler()
 void ProjectDataUpdate()
 {
     // HeartBeatUpdate();
-    ProjectData.runTime++;
+    ProjectData.runTime = micros() / 1000;
     updateLocalTime();
 
-    Serial.printf("Dev IPv4:%s\r\n", WiFi_Data.WiFi_store[0].ipv4.toString());
+    Serial.printf("Dev IPv4:%s\r\n", WiFi_Data.WiFi_store[0].ipv4.toString().c_str());
 
     if(WiFi.status() == WL_CONNECTED){
        ProjectData.wifistatus = 0; 
