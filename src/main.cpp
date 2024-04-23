@@ -20,6 +20,11 @@ static void SystemData_GUI();
 void setup()
 {
   Serial.begin(115200);
+
+  pinMode(10, INPUT_PULLUP);  //BLE开关
+  pinMode(6, INPUT_PULLUP);   //屏幕切换开关
+
+  GUI_setup();
   
   xTaskCreatePinnedToCore(IoTTaskThread, "IoTTask", 1024*6, NULL, 2, &IoTTaskHandle, 1);
 
@@ -45,8 +50,8 @@ void ModBusThread(void *argument){
 }
 
 void GUITaskThread(void *argument){
-  GUI_setup();
   for(;;){
+    GUI_sysInfoUpdate();
     lv_timer_handler();
     vTaskDelay(3);
   }
@@ -63,7 +68,6 @@ void IoTTaskThread(void *argument){
   for(;;){
     BLEHandler();
     WiFiHandler();
-    ProjectDataUpdate();
     vTaskDelay(50);
   }
 }
@@ -78,9 +82,18 @@ void SystemData_GUI(){
   GUI_sysPrint(0, 128, "last update date: %s", __DATE__);
 }
 
+static void keyValueRead(uint8_t* BLE_key, uint8_t* screen_key){
+  *BLE_key = (uint8_t)digitalRead(10);
+  *screen_key = (uint8_t)digitalRead(6);
+}
+
 uint8_t dataLogMode = 0;
+extern BLEServer *pServer;
+extern BLEService *pService;
 void loop()
 {
+  uint8_t BLE_key, screen_key;
+  keyValueRead(&BLE_key, &screen_key);
 
   if(dataLogMode == 1){
     Serial.printf("---------------JYD Original Data-----------------\r\n");
@@ -128,6 +141,14 @@ void loop()
   if(WiFi.status() != WL_CONNECTED){
     WiFi.begin(WiFi_Data.WiFi_store[0].SSID, WiFi_Data.WiFi_store[0].PassWord);
   }
+
+  WiFi_Data.WiFi_store[0].ipv4 = WiFi.localIP();
+
+  ProjectDataUpdate();
   
+  ProjectData.freeHeap = ESP.getFreeHeap(); 
+  ProjectData.heapUsage = ((float)ProjectData.freeHeap / (float)ESP.getHeapSize()) * 100.0f;
+  ProjectData.WiFi_dB = (float)WiFi.RSSI();
+
   delay(1000);
 }

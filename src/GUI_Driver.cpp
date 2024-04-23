@@ -55,3 +55,19 @@ void GUI_sysPrint(int32_t x, int32_t y, const char* str, ...){
 
     tft.drawString(buffer, x, y, 2);
 }
+
+extern Error modbusError;
+void GUI_sysInfoUpdate(){
+  ModbusError me(modbusError);
+  char sysTime[8];
+  snprintf(sysTime, 8, "%d s", ProjectData.runTime);
+
+  lv_textarea_set_text(guider_ui.screen_WiFi_SSID, WiFi_Data.WiFi_store[0].SSID);
+  lv_textarea_set_text(guider_ui.screen_IPv4, WiFi_Data.WiFi_store[0].ipv4.toString().c_str());
+  lv_textarea_set_text(guider_ui.screen_BLE, ProjectData.blestatus ? "BLE Connected" : "disconnect");
+  lv_textarea_set_text(guider_ui.screen_Dev, (const char *)me);
+  lv_textarea_set_text(guider_ui.screen_sysTime, sysTime);
+
+  lv_bar_set_value(guider_ui.screen_RAM_bar, (int32_t)ProjectData.heapUsage, LV_ANIM_ON);
+  lv_bar_set_value(guider_ui.screen_CPU_bar, (int32_t)ProjectData.WiFi_dB, LV_ANIM_ON);
+}

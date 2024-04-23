@@ -16,6 +16,9 @@ uint16_t serverPort = 8888;
 
 String readTCP;
 
+BLEServer *pServer;
+BLEService *pService;
+
 BLEUUID ServiceUUID("ab1ad444-6724-11e9-a923-1681be663d3e");                                                                                         // 服务的UUID
 BLECharacteristic RX_Characteristics("ab1ad980-6724-11e9-a923-1681be663d3e", BLECharacteristic::PROPERTY_WRITE);                                     // 接收字符串的特征值
 BLEDescriptor RX_Descriptor(BLEUUID((uint16_t)0x2901));                                                                                              // 接收字符串描述符
@@ -125,9 +128,9 @@ void WiFi_BLE_setUp()
     configTime(gmtOffset_sec, daylightOffset_sec, ntpServer);
 
     BLEDevice::init(bleServer);                     // 初始化BLE客户端设备
-    BLEServer *pServer = BLEDevice::createServer(); // BLEServer指针，创建Server
+    pServer = BLEDevice::createServer(); // BLEServer指针，创建Server
     BLEDevice::setMTU(256);
-    BLEService *pService = pServer->createService(ServiceUUID); // BLEService指针，创建Service
+    pService = pServer->createService(ServiceUUID); // BLEService指针，创建Service
 
     pServer->setCallbacks(new MyServerCallbacks()); // 设置连接和断开调用类
 
@@ -267,31 +270,16 @@ void WiFiHandler()
 
 void ProjectDataUpdate()
 {
-    HeartBeatUpdate();
+    // HeartBeatUpdate();
+    ProjectData.runTime++;
     updateLocalTime();
-    static int cnt_dataupdate;
 
-    Serial.printf("Dev IPv4:%s\r\n", WiFi.localIP().toString().c_str());
+    Serial.printf("Dev IPv4:%s\r\n", WiFi_Data.WiFi_store[0].ipv4.toString());
+
     if(WiFi.status() == WL_CONNECTED){
        ProjectData.wifistatus = 0; 
     }else{
        ProjectData.wifistatus = 1; 
-       WiFi.begin(WiFi_Data.WiFi_store[0].SSID, WiFi_Data.WiFi_store[0].PassWord);
-    }
-
-    if (ProjectData.runTime >= ProjectData.worktime)
-    {
-        ProjectData.switchStatus = 0;
-    }
-
-    if (ProjectData.switchStatus == 1)
-    {
-        cnt_dataupdate++;
-        if (cnt_dataupdate >= 200) // 延时5ms的话, 计数200次为+1秒
-        {
-            ProjectData.runTime += 1;
-            cnt_dataupdate = 0;
-        }
     }
 }
 

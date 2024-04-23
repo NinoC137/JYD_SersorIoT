@@ -303,11 +303,14 @@ void handleData(ModbusMessage response, uint32_t token)
   // free(responseData);
 }
 
+Error modbusError;
 void handleError(Error error, uint32_t token)
 {
   // ModbusError wraps the error code and provides a readable error message for it
   ModbusError me(error);
+  modbusError = error;
   Serial.printf("Error response: %02X - %s\n", (int)me, (const char *)me);
+  
 }
 
 void Modbus_Init()

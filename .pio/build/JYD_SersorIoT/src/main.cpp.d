@@ -589,10 +589,8 @@
  .pio/libdeps/JYD_SersorIoT/lvgl/src/extra/widgets/imgbtn/../../../lvgl.h \
  .pio/libdeps/JYD_SersorIoT/lvgl/src/extra/widgets/span/lv_span.h \
  .pio/libdeps/JYD_SersorIoT/lvgl/src/extra/widgets/span/../../../lvgl.h \
- lib/GUIDER/generated/gui_guider.h \
- lib/GUIDER/generated/guider_fonts/guider_fonts.h \
- .pio/libdeps/JYD_SersorIoT/lvgl/src/font/lv_font.h \
- lib/GUIDER/generated/events_init.h lib/GUIDER/generated/gui_guider.h \
+ lib/GUIDER/generated/gui_guider.h lib/GUIDER/generated/events_init.h \
+ lib/GUIDER/generated/gui_guider.h include/WiFi_BLE.h \
  include/ModbusTask.h \
  .pio/libdeps/JYD_SersorIoT/eModbus/src/ModbusClientRTU.h \
  .pio/libdeps/JYD_SersorIoT/eModbus/src/options.h \
@@ -604,4 +602,4 @@
  C:/users/hp/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32s3/include/soc/esp32s3/include/soc/uart_struct.h \
  .pio/libdeps/JYD_SersorIoT/CRC/src/CRC16.h \
  .pio/libdeps/JYD_SersorIoT/CRC/src/CrcParameters.h \
- .pio/libdeps/JYD_SersorIoT/CRC/src/CrcDefines.h include/WiFi_BLE.h
+ .pio/libdeps/JYD_SersorIoT/CRC/src/CrcDefines.h include/ModbusTask.h

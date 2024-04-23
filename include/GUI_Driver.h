@@ -6,9 +6,14 @@
 #include <gui_guider.h>
 #include <events_init.h>
 
+#include "WiFi_BLE.h"
+#include "ModbusTask.h"
+
 void GUI_setup();
 
 void GUI_sysPrint(int32_t x, int32_t y, const char* str, ...);
+
+void GUI_sysInfoUpdate();
 
 extern TFT_eSPI tft;
 

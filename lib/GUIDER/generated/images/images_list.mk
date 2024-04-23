@@ -1,0 +1,1 @@
+GEN_CSRCS += _JYD_LOGO_alpha_148x38.c _wifi_alpha_48x52.c _BLE_alpha_37x38.c _Devices_alpha_50x46.c _IP_alpha_42x39.c _sysTime_alpha_43x44.c _WiFi_dB_alpha_49x51.c _rooooler_alpha_100x100.c _RAM_alpha_40x40.c

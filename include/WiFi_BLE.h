@@ -74,12 +74,11 @@ class ProjectDataPacket{
 public:
   bool blestatus;
   bool wifistatus;
-  bool switchStatus;
-  int speed;
-  int temp;
   std::string time;
 
-  int worktime; //单位为秒
+  uint32_t freeHeap;
+  float heapUsage;
+  int8_t WiFi_dB;
   int runTime;  //单位为秒
 
   std::string device_ID;
